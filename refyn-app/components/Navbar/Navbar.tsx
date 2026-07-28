@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import Logo from '@/components/Logo/Logo';
+import { useAuthModal } from '@/context/AuthModalContext';
 import styles from './Navbar.module.scss';
 
 const navLinks = [
@@ -14,8 +15,9 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [mobileOpen,  setMobileOpen]  = useState(false);
+  const [scrolled,   setScrolled]   = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { openAuthModal } = useAuthModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -45,10 +47,13 @@ export default function Navbar() {
           <a href="#pricing" className={styles.ctaSecondary}>
             View Pricing
           </a>
-          <a href="#get-started" className={styles.ctaPrimary}>
+          <button
+            className={styles.ctaPrimary}
+            onClick={openAuthModal}
+          >
             Try for Free
             <span className={styles.ctaArrow} aria-hidden="true">→</span>
-          </a>
+          </button>
           <button
             className={styles.hamburger}
             onClick={() => setMobileOpen((v) => !v)}
@@ -77,12 +82,19 @@ export default function Navbar() {
             <a href="#pricing" className={styles.ctaSecondary} onClick={() => setMobileOpen(false)}>
               View Pricing
             </a>
-            <a href="#get-started" className={styles.ctaPrimary} onClick={() => setMobileOpen(false)}>
+            <button
+              className={styles.ctaPrimary}
+              onClick={() => {
+                setMobileOpen(false);
+                openAuthModal();
+              }}
+            >
               Try for Free →
-            </a>
+            </button>
           </div>
         </nav>
       </div>
     </header>
   );
 }
+

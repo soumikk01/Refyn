@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import styles from './Languages.module.scss';
 
 const LANGS = [
@@ -22,9 +25,68 @@ const LANGS = [
   { name: 'Terraform',   emoji: '🏗️', category: 'DevOps'   },
 ];
 
-export default function Languages() {
+const centerIndex = Math.floor(LANGS.length / 2);
+
+interface LangCardProps {
+  lang: typeof LANGS[0];
+  index: number;
+  centerIndex: number;
+  scrollYProgress: MotionValue<number>;
+}
+
+const AnimatedLangCard = ({ lang, index, centerIndex, scrollYProgress }: LangCardProps) => {
+  const distanceFromCenter = index - centerIndex;
+
+  const x = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    [distanceFromCenter * 35, 0]
+  );
+  const rotate = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    [distanceFromCenter * 12, 0]
+  );
+  const y = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    [-Math.abs(distanceFromCenter) * 10, 0]
+  );
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.35], [0.2, 1]);
+
   return (
-    <section className={styles.section} id="languages" aria-labelledby="langs-heading">
+    <motion.div
+      className={styles.langCard}
+      style={{
+        x,
+        rotate,
+        y,
+        scale,
+        opacity,
+        transformOrigin: 'center',
+      }}
+    >
+      <span className={styles.langEmoji} aria-hidden="true">{lang.emoji}</span>
+      <span className={styles.langName}>{lang.name}</span>
+      <span className={styles.langCat}>{lang.category}</span>
+    </motion.div>
+  );
+};
+
+export default function Languages() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'center center'],
+  });
+
+  const moreScale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
+  const moreOpacity = useTransform(scrollYProgress, [0, 0.35], [0.2, 1]);
+
+  return (
+    <section ref={sectionRef} className={styles.section} id="languages" aria-labelledby="langs-heading">
       {/* Background Video */}
       <video
         autoPlay
@@ -50,22 +112,34 @@ export default function Languages() {
           </p>
         </div>
 
-        {/* Language grid */}
-        <div className={styles.grid}>
+        {/* Language grid with 3D scroll parallax */}
+        <div
+          className={styles.grid}
+          style={{ perspective: '500px' }}
+        >
           {LANGS.map((lang, i) => (
-            <div key={i} className={styles.langCard}>
-              <span className={styles.langEmoji} aria-hidden="true">{lang.emoji}</span>
-              <span className={styles.langName}>{lang.name}</span>
-              <span className={styles.langCat}>{lang.category}</span>
-            </div>
+            <AnimatedLangCard
+              key={i}
+              lang={lang}
+              index={i}
+              centerIndex={centerIndex}
+              scrollYProgress={scrollYProgress}
+            />
           ))}
-          <div className={`${styles.langCard} ${styles.more}`}>
+          <motion.div
+            className={`${styles.langCard} ${styles.more}`}
+            style={{
+              opacity: moreOpacity,
+              scale: moreScale,
+            }}
+          >
             <span className={styles.moreText}>+12 more</span>
             <span className={styles.moreNote}>& growing</span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
+
 

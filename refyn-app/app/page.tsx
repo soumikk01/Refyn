@@ -1,3 +1,6 @@
+'use client';
+
+import { AuthModalProvider } from '@/context/AuthModalContext';
 import Navbar    from '@/components/Navbar/Navbar';
 import Hero       from '@/components/Hero/Hero';
 import Features   from '@/components/Features/Features';
@@ -9,15 +12,18 @@ import Footer     from '@/components/Footer/Footer';
 
 export default function HomePage() {
   return (
-    <main>
-      <Navbar />
-      <Hero />
-      <Features />
-      <HowItWorks />
-      <Languages />
-      <Pricing />
-      <CTABanner />
-      <Footer />
-    </main>
+    <AuthModalProvider>
+      <main>
+        <Navbar />
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Languages />
+        <Pricing />
+        <CTABanner />
+        <Footer />
+      </main>
+    </AuthModalProvider>
   );
 }
+

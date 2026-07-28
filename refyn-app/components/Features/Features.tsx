@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './Features.module.scss';
 
 const FEATURES = [
@@ -70,7 +73,14 @@ export default function Features() {
 
         <div className={styles.grid}>
           {FEATURES.map((f, i) => (
-            <article key={i} className={`${styles.card} ${f.gradientClass}`}>
+            <motion.article
+              key={i}
+              className={`${styles.card} ${f.gradientClass}`}
+              initial={{ opacity: 0, y: 28, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
+            >
               <div className={styles.meshOverlay} aria-hidden="true" />
               <div className={styles.cardContent}>
                 <div className={styles.cardIcon} aria-hidden="true">{f.icon}</div>
@@ -82,11 +92,13 @@ export default function Features() {
                   ))}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+
 

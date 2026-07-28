@@ -1,9 +1,14 @@
+'use client';
+
 import React from 'react';
 import styles from './Hero.module.scss';
 import VideoBg from '@/components/VideoBg/VideoBg';
 import HeroPanel from '@/components/HeroPanel/HeroPanel';
+import { useAuthModal } from '@/context/AuthModalContext';
 
 export default function Hero() {
+  const { openAuthModal } = useAuthModal();
+
   return (
     <section className={styles.hero} id="hero" aria-label="Hero">
 
@@ -36,9 +41,9 @@ export default function Hero() {
 
           {/* CTA — Boomerang black pill */}
           <div className={styles.actions}>
-            <a href="#get-started" className={styles.ctaPrimary}>
+            <button className={styles.ctaPrimary} onClick={openAuthModal}>
               Start reviewing for free
-            </a>
+            </button>
             <a href="#how-it-works" className={styles.ctaSecondary}>
               See how it works
             </a>
@@ -61,3 +66,4 @@ export default function Hero() {
     </section>
   );
 }
+

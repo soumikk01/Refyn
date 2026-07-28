@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react';
 import styles from './CTABanner.module.scss';
+import { useAuthModal } from '@/context/AuthModalContext';
 
 export default function CTABanner() {
+  const { openAuthModal } = useAuthModal();
+
   return (
     <section className={styles.section} id="get-started" aria-labelledby="cta-heading">
       <div className="container">
@@ -37,10 +42,10 @@ export default function CTABanner() {
             </p>
 
             <div className={styles.actions}>
-              <a href="#" className={styles.primaryBtn}>
+              <button className={styles.primaryBtn} onClick={openAuthModal}>
                 Analyze my code for free
                 <span aria-hidden="true" className={styles.arrow}>→</span>
-              </a>
+              </button>
               <a href="#pricing" className={styles.ghostBtn}>
                 See all plans
               </a>
@@ -73,4 +78,5 @@ export default function CTABanner() {
     </section>
   );
 }
+
 

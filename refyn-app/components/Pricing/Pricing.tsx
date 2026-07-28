@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import styles from './Pricing.module.scss';
+import { useAuthModal } from '@/context/AuthModalContext';
 
 const PLANS = [
   {
@@ -9,7 +12,6 @@ const PLANS = [
     description: 'Perfect for individual developers exploring AI code review.',
     highlight: false,
     cta: 'Get started free',
-    ctaHref: '#get-started',
     features: [
       '50 reviews per month',
       'Up to 200 lines per review',
@@ -28,7 +30,6 @@ const PLANS = [
     highlight: true,
     badge: 'Most popular',
     cta: 'Start 14-day free trial',
-    ctaHref: '#get-started',
     features: [
       'Unlimited reviews',
       'Up to 5,000 lines per review',
@@ -47,7 +48,6 @@ const PLANS = [
     description: 'Shared workspace for engineering teams, with admin controls.',
     highlight: false,
     cta: 'Start team trial',
-    ctaHref: '#get-started',
     features: [
       'Everything in Pro',
       'Up to 10 seats included',
@@ -62,6 +62,8 @@ const PLANS = [
 ];
 
 export default function Pricing() {
+  const { openAuthModal } = useAuthModal();
+
   return (
     <section className={styles.section} id="pricing" aria-labelledby="pricing-heading">
       <div className="container">
@@ -97,12 +99,12 @@ export default function Pricing() {
                 <p className={styles.planDesc}>{plan.description}</p>
               </div>
 
-              <a
-                href={plan.ctaHref}
+              <button
+                onClick={openAuthModal}
                 className={`${styles.planCta} ${plan.highlight ? styles.ctaPrimary : styles.ctaOutline}`}
               >
                 {plan.cta}
-              </a>
+              </button>
 
               <ul className={styles.featureList} aria-label={`${plan.name} plan features`}>
                 {plan.features.map((f, j) => (
@@ -118,9 +120,10 @@ export default function Pricing() {
 
         <p className={styles.enterpriseNote}>
           Need custom limits, on-prem deployment, or a dedicated SLA?{' '}
-          <a href="#company" className={styles.link}>Talk to our enterprise team →</a>
+          <button onClick={openAuthModal} className={styles.link}>Talk to our enterprise team →</button>
         </p>
       </div>
     </section>
   );
 }
+
