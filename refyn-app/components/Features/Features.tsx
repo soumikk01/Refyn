@@ -8,6 +8,7 @@ const FEATURES = [
     description:
       'Refyn scans your code in milliseconds, identifying off-by-one errors, null pointer exceptions, type mismatches, and logic flaws before they reach production.',
     tags: ['Static analysis', 'Runtime prediction', 'Type errors'],
+    gradientClass: styles.cardGradient1,
   },
   {
     icon: '🧠',
@@ -15,6 +16,7 @@ const FEATURES = [
     description:
       'Every bug comes with a clear, jargon-free explanation of what went wrong, why it matters, and where the issue originates — perfect for all experience levels.',
     tags: ['Root cause', 'Impact analysis', 'Beginner-friendly'],
+    gradientClass: styles.cardGradient2,
   },
   {
     icon: '🔧',
@@ -22,6 +24,7 @@ const FEATURES = [
     description:
       'Get concrete, copy-paste-ready code patches for every issue. Refyn doesn\'t just point at problems — it hands you the solution with an explanation of the reasoning.',
     tags: ['Code patches', 'Best practices', 'Refactoring hints'],
+    gradientClass: styles.cardGradient3,
   },
   {
     icon: '🌐',
@@ -29,6 +32,7 @@ const FEATURES = [
     description:
       'From TypeScript and Python to Rust and Go, Refyn speaks your language. Works across front-end, back-end, systems, and data engineering stacks.',
     tags: ['TypeScript', 'Python', 'Rust', 'Go', '+26 more'],
+    gradientClass: styles.cardGradient4,
   },
   {
     icon: '🔒',
@@ -36,6 +40,7 @@ const FEATURES = [
     description:
       'Your code never trains our models. All analysis runs in isolated, ephemeral sandboxes. Zero data retention by default — built for teams handling sensitive IP.',
     tags: ['No data retention', 'Ephemeral compute', 'SOC 2 ready'],
+    gradientClass: styles.cardGradient5,
   },
   {
     icon: '⚡',
@@ -43,6 +48,7 @@ const FEATURES = [
     description:
       'Drop Refyn into your GitHub Actions, GitLab CI, or Bitbucket Pipelines workflow. Automated PR reviews with inline comments — no new tools to learn.',
     tags: ['GitHub Actions', 'GitLab CI', 'Bitbucket', 'API'],
+    gradientClass: styles.cardGradient6,
   },
 ];
 
@@ -64,14 +70,17 @@ export default function Features() {
 
         <div className={styles.grid}>
           {FEATURES.map((f, i) => (
-            <article key={i} className={styles.card}>
-              <div className={styles.cardIcon} aria-hidden="true">{f.icon}</div>
-              <h3 className={styles.cardTitle}>{f.title}</h3>
-              <p className={styles.cardDesc}>{f.description}</p>
-              <div className={styles.tags}>
-                {f.tags.map((t, j) => (
-                  <span key={j} className={styles.tag}>{t}</span>
-                ))}
+            <article key={i} className={`${styles.card} ${f.gradientClass}`}>
+              <div className={styles.meshOverlay} aria-hidden="true" />
+              <div className={styles.cardContent}>
+                <div className={styles.cardIcon} aria-hidden="true">{f.icon}</div>
+                <h3 className={styles.cardTitle}>{f.title}</h3>
+                <p className={styles.cardDesc}>{f.description}</p>
+                <div className={styles.tags}>
+                  {f.tags.map((t, j) => (
+                    <span key={j} className={styles.tag}>{t}</span>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
@@ -80,3 +89,4 @@ export default function Features() {
     </section>
   );
 }
+

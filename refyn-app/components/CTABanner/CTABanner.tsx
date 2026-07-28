@@ -5,13 +5,28 @@ export default function CTABanner() {
   return (
     <section className={styles.section} id="get-started" aria-labelledby="cta-heading">
       <div className="container">
-        <div className={styles.card}>
+        <div className={`${styles.card} ${styles.liquidGlass}`}>
+          {/* Background video from Neuralyn design */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={styles.bgVideo}
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
+          />
+          <div className={styles.videoOverlay} aria-hidden="true" />
+          <div className={styles.gradientFade} aria-hidden="true" />
+
           {/* Decorative blobs */}
           <div className={styles.blob1} aria-hidden="true" />
           <div className={styles.blob2} aria-hidden="true" />
 
           <div className={styles.content}>
-            <div className={styles.label}>START FOR FREE TODAY</div>
+            <div className={styles.liquidPill}>
+              <span className={styles.pillBadge}>New</span>
+              <span>START FOR FREE TODAY</span>
+            </div>
             <h2 className={styles.heading} id="cta-heading">
               Your code deserves a<br />
               second pair of eyes
@@ -58,3 +73,4 @@ export default function CTABanner() {
     </section>
   );
 }
+

@@ -22,12 +22,23 @@ const LANGS = [
   { name: 'Terraform',   emoji: '🏗️', category: 'DevOps'   },
 ];
 
-const CATEGORIES = ['All', 'Frontend', 'Backend', 'Systems', 'Mobile', 'Data', 'DevOps', 'Enterprise'];
-
 export default function Languages() {
   return (
     <section className={styles.section} id="languages" aria-labelledby="langs-heading">
-      <div className="container">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={styles.bgVideo}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4"
+      />
+      <div className={styles.videoOverlay} aria-hidden="true" />
+      <div className={styles.topGradient} aria-hidden="true" />
+      <div className={styles.bottomGradient} aria-hidden="true" />
+
+      <div className={`container ${styles.content}`}>
         <div className={styles.header}>
           <div className={styles.label}>LANGUAGE SUPPORT</div>
           <h2 className={styles.heading} id="langs-heading">
@@ -37,15 +48,6 @@ export default function Languages() {
           <p className={styles.subheading}>
             30+ programming languages, frameworks, and config formats. If you write it, Refyn reads it.
           </p>
-        </div>
-
-        {/* Category pills */}
-        <div className={styles.categories} role="list" aria-label="Language categories">
-          {CATEGORIES.map((c, i) => (
-            <span key={i} className={`${styles.category} ${i === 0 ? styles.active : ''}`} role="listitem">
-              {c}
-            </span>
-          ))}
         </div>
 
         {/* Language grid */}
@@ -66,3 +68,4 @@ export default function Languages() {
     </section>
   );
 }
+

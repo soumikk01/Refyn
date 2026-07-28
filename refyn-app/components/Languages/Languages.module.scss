@@ -1,20 +1,56 @@
 .section {
   padding: 120px 0 100px;
-  background: #0f1117;
+  background: #090a0f;
   position: relative;
   overflow: hidden;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0, 196, 167, 0.08) 0%, transparent 65%);
-    pointer-events: none;
-  }
+/* ── Background Video ── */
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.45;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(9, 10, 15, 0.5) 0%, rgba(9, 10, 15, 0.95) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.topGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, #090a0f 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bottomGradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, #090a0f 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
 }
 
 .header {
@@ -50,42 +86,16 @@
   line-height: 1.7;
 }
 
-// ── Category pills ──
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 48px;
-}
-
-.category {
-  padding: 6px 18px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.45);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: all var(--transition);
-
-  &:hover, &.active {
-    color: #fff;
-    border-color: rgba(0, 196, 167, 0.4);
-    background: rgba(0, 196, 167, 0.1);
-  }
-}
-
 // ── Language grid ──
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px 12px;
 
   @media (min-width: 480px)  { grid-template-columns: repeat(4, 1fr); }
   @media (min-width: 640px)  { grid-template-columns: repeat(5, 1fr); }
   @media (min-width: 900px)  { grid-template-columns: repeat(6, 1fr); }
-  @media (min-width: 1100px) { grid-template-columns: repeat(7, 1fr); }
+  @media (min-width: 1100px) { grid-template-columns: repeat(6, 1fr); }
 }
 
 .langCard {
@@ -93,41 +103,46 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 20px 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  padding: 14px 8px;
+  background: transparent;
+  border: none;
+  transition: transform var(--transition);
   cursor: default;
 
   &:hover {
-    background: rgba(0, 196, 167, 0.06);
-    border-color: rgba(0, 196, 167, 0.25);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+
+    .langEmoji {
+      transform: scale(1.12);
+    }
+    .langName {
+      color: var(--color-teal);
+    }
   }
 }
 
 .langEmoji {
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1;
+  margin-bottom: 2px;
+  transition: transform var(--transition);
 }
 
 .langName {
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
-  color: rgba(255,255,255,0.8);
+  color: #ffffff;
   text-align: center;
+  transition: color var(--transition);
 }
 
 .langCat {
-  font-size: 10.5px;
-  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
   font-weight: 500;
 }
 
 .more {
-  background: rgba(0, 196, 167, 0.06);
-  border-color: rgba(0, 196, 167, 0.2);
   justify-content: center;
 }
 

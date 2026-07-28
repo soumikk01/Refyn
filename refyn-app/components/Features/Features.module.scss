@@ -63,20 +63,67 @@
 }
 
 .card {
+  position: relative;
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-xl);
+  padding: 36px 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
   display: flex;
   flex-direction: column;
-  gap: 0;
 
   &:hover {
-    border-color: rgba(0, 196, 167, 0.35);
-    box-shadow: 0 8px 32px rgba(0, 196, 167, 0.08);
-    transform: translateY(-3px);
+    border-color: rgba(0, 196, 167, 0.4);
+    box-shadow: 0 16px 40px -10px rgba(0, 196, 167, 0.14);
+    transform: translateY(-4px);
   }
+}
+
+.meshOverlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(circle at center top, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center top, black 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardGradient1 {
+  background: radial-gradient(circle at 50% 0%, #FFB347 0%, #F9ED96 30%, #ffffff 70%, #ffffff 100%);
+}
+
+.cardGradient2 {
+  background: radial-gradient(circle at 50% 0%, #E5A1F5 0%, #F8ACA0 30%, #ffffff 70%, #ffffff 100%);
+}
+
+.cardGradient3 {
+  background: radial-gradient(circle at 50% 0%, #86efac 0%, #baf5eb 30%, #ffffff 70%, #ffffff 100%);
+}
+
+.cardGradient4 {
+  background: radial-gradient(circle at 50% 0%, #F9ED96 0%, #E5A1F5 30%, #ffffff 70%, #ffffff 100%);
+}
+
+.cardGradient5 {
+  background: radial-gradient(circle at 50% 0%, #FFB347 0%, #F8ACA0 30%, #ffffff 70%, #ffffff 100%);
+}
+
+.cardGradient6 {
+  background: radial-gradient(circle at 50% 0%, #baf5eb 0%, #E5A1F5 30%, #ffffff 70%, #ffffff 100%);
 }
 
 .cardIcon {

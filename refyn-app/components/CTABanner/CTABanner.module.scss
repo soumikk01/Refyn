@@ -5,12 +5,12 @@
 
 .card {
   position: relative;
-  background: linear-gradient(135deg, #0f1117 0%, #111a19 50%, #0f1117 100%);
+  background: #000000;
   border-radius: var(--radius-xl);
   padding: 80px 60px;
   overflow: hidden;
   text-align: center;
-  border: 1px solid rgba(0, 196, 167, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 
   @media (max-width: 640px) {
     padding: 56px 28px;
@@ -18,10 +18,79 @@
   }
 }
 
+/* ── Background Video ── */
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.55;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gradientFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #000000 0%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Liquid Glass ── */
+.liquidGlass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.liquidPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 24px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pillBadge {
+  background: #ffffff;
+  color: #000000;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  line-height: 1.2;
+}
+
 .blob1, .blob2 {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .blob1 {
@@ -42,7 +111,7 @@
 
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -30,7 +30,19 @@ const LINKS = {
 export default function Footer() {
   return (
     <footer className={styles.footer} id="company">
-      <div className="container">
+      {/* Background video from Neuralyn specification */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className={styles.bgVideo}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
+      />
+      <div className={styles.videoOverlay} aria-hidden="true" />
+      <div className={styles.topGradient} aria-hidden="true" />
+
+      <div className={`container ${styles.content}`}>
         {/* Top row */}
         <div className={styles.top}>
           {/* Brand column */}
@@ -90,3 +102,4 @@ export default function Footer() {
     </footer>
   );
 }
+
