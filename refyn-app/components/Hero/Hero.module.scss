@@ -1,0 +1,187 @@
+/*
+ * Hero — Boomerang-style full-screen layout
+ * - Video background at z-0
+ * - Centered copy block (serif headline, subcopy, CTA) at top
+ * - HeroPanel glass card anchored to viewport bottom (mt-auto)
+ */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background: #fff; /* fallback before video loads */
+}
+
+/* ── Foreground container (full height flex column) ── */
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Copy block ── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 96px;
+  padding-inline: 20px;
+
+  @media (min-width: 640px)  { padding-top: 108px; padding-inline: 28px; }
+  @media (min-width: 768px)  { padding-top: 128px; }
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 0.75);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.35); }
+}
+
+/* ── Headline — P22 Mackinac Boomerang style ── */
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 7vw, 88px);
+  font-weight: 400; /* Book weight — Boomerang-style thin serif */
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #191919;
+  margin-bottom: 24px;
+  max-width: 820px;
+
+  /* Render italic naturally for em tag */
+  em { font-style: italic; }
+}
+
+/* Accent — teal color on "faster." */
+.accent {
+  color: var(--color-teal);
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* Sub copy */
+.sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(25, 25, 25, 0.65);
+  line-height: 1.72;
+  max-width: 460px;
+  margin-bottom: 32px;
+
+  @media (min-width: 768px) { font-size: 16px; max-width: 520px; }
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+/* Boomerang-spec black pill */
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #191919;
+  border-radius: 10px;
+  transition: background 200ms ease, transform 200ms ease;
+  letter-spacing: -0.01em;
+
+  &:hover {
+    background: rgba(25, 25, 25, 0.85);
+    transform: translateY(-1px);
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 0.6);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: color 200ms ease, background 200ms ease, border-color 200ms ease;
+
+  &:hover {
+    color: #191919;
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* Trust strip */
+.trust {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(25, 25, 25, 0.50);
+}
+
+.check {
+  color: var(--color-teal);
+  font-size: 12px;
+}
+
+/* Push the panel to the bottom of the flex column */
+.content {
+  > :last-child {
+    margin-top: auto;
+  }
+}

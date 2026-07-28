@@ -1,0 +1,220 @@
+.section {
+  padding: 120px 0 100px;
+  background: var(--color-surface);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+}
+
+.header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 72px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--color-teal);
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+
+.accent { color: var(--color-teal); font-style: italic; }
+
+.subheading {
+  font-size: 16px;
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+}
+
+// ── Plans grid ──
+.plans {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+  max-width: 1060px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.plan {
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  transition: box-shadow var(--transition), transform var(--transition);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.highlighted {
+    border-color: var(--color-teal);
+    background: var(--color-bg);
+    box-shadow: 0 0 0 4px rgba(0, 196, 167, 0.08), var(--shadow-lg);
+
+    &:hover {
+      box-shadow: 0 0 0 4px rgba(0, 196, 167, 0.12), 0 12px 48px rgba(0, 196, 167, 0.15);
+    }
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-teal);
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.planHeader {
+  margin-bottom: 28px;
+}
+
+.planName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink-faint);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+}
+
+.period {
+  font-size: 15px;
+  color: var(--color-ink-faint);
+  font-weight: 400;
+}
+
+.planDesc {
+  font-size: 14px;
+  color: var(--color-ink-muted);
+  line-height: 1.65;
+}
+
+// ── CTA button ──
+.planCta {
+  display: block;
+  text-align: center;
+  padding: 13px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  margin-bottom: 28px;
+  transition: all var(--transition);
+  letter-spacing: -0.01em;
+}
+
+.ctaPrimary {
+  color: #fff;
+  background: var(--color-teal);
+  box-shadow: var(--shadow-teal);
+
+  &:hover {
+    background: var(--color-teal-dark);
+    box-shadow: 0 6px 28px rgba(0, 196, 167, 0.4);
+    transform: translateY(-1px);
+  }
+}
+
+.ctaOutline {
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-border);
+
+  &:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal-dark);
+    background: var(--color-teal-light);
+  }
+}
+
+// ── Features ──
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-ink-muted);
+  line-height: 1.5;
+}
+
+.check {
+  color: var(--color-teal);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+// ── Enterprise note ──
+.enterpriseNote {
+  text-align: center;
+  margin-top: 48px;
+  font-size: 14px;
+  color: var(--color-ink-faint);
+}
+
+.link {
+  color: var(--color-teal-dark);
+  font-weight: 500;
+  transition: color var(--transition);
+
+  &:hover { color: var(--color-teal); }
+}

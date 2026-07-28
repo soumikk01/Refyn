@@ -1,0 +1,119 @@
+.section {
+  padding: 120px 0 100px;
+  background: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+}
+
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 72px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--color-teal);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  margin-bottom: 20px;
+}
+
+.headingAccent {
+  color: var(--color-teal);
+  font-style: italic;
+}
+
+.subheading {
+  font-size: 17px;
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+}
+
+// ── Cards grid ──
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 640px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  &:hover {
+    border-color: rgba(0, 196, 167, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 196, 167, 0.08);
+    transform: translateY(-3px);
+  }
+}
+
+.cardIcon {
+  font-size: 32px;
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin-bottom: 12px;
+}
+
+.cardDesc {
+  font-size: 14.5px;
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.tag {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--color-teal-dark);
+  background: var(--color-teal-light);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.01em;
+}

@@ -1,0 +1,153 @@
+/* HeroPanel — Boomerang-style glass card, flush to viewport bottom */
+
+.outer {
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 24px;
+
+  @media (min-width: 640px)  { padding-inline: 32px; }
+  @media (min-width: 1024px) { padding-inline: 48px; }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(230, 230, 230, 0.9);
+  border-bottom: none;
+  border-radius: 18px 18px 0 0; /* flush bottom */
+  box-shadow: 0 -2px 32px rgba(0, 0, 0, 0.06);
+  padding-top: 32px;
+  padding-bottom: 0;
+  padding-inline: 24px;
+
+  @media (min-width: 640px)  { padding-top: 48px;  padding-inline: 36px;  }
+  @media (min-width: 768px)  { padding-top: 56px;  padding-inline: 52px;  }
+}
+
+/* ── Row 1 ── */
+.row1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.microLabel {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(25, 25, 25, 0.50);
+  margin-bottom: 12px;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3.2vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #191919;
+}
+
+.brSm {
+  display: none;
+  @media (min-width: 480px) { display: inline; }
+}
+
+.right {
+  display: flex;
+  align-items: flex-end;
+}
+
+.body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(25, 25, 25, 0.65);
+
+  @media (min-width: 768px) { font-size: 15px; }
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(210, 210, 210, 0.7);
+  width: 100%;
+  margin-top: 24px;
+
+  @media (min-width: 640px) { margin-top: 32px; }
+  @media (min-width: 768px) { margin-top: 40px; }
+}
+
+/* ── Row 2: feature chips ── */
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 8px;
+
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #F4F3F3;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+
+  &:hover {
+    background: #eaeaea;
+
+    .arrow {
+      color: #555;
+      transform: translateX(3px);
+    }
+  }
+}
+
+.chipLeft {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.chipNum {
+  font-size: 13px;
+  color: rgba(25, 25, 25, 0.38);
+  font-weight: 400;
+}
+
+.chipSlash {
+  font-size: 13px;
+  color: rgba(25, 25, 25, 0.25);
+  margin: 0 8px;
+}
+
+.chipLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #191919;
+}
+
+.arrow {
+  color: #aaa;
+  flex-shrink: 0;
+  transition: color 200ms ease, transform 200ms ease;
+}

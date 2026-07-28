@@ -1,0 +1,319 @@
+.panel {
+  background: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 196, 167, 0.08),
+    var(--shadow-lg),
+    0 0 80px rgba(0, 196, 167, 0.06);
+  font-family: var(--font-mono);
+  position: relative;
+
+  // Subtle top glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 196, 167, 0.5), transparent);
+  }
+}
+
+// ── Window chrome ──
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.7;
+
+  &.red    { background: #ff5f57; }
+  &.yellow { background: #febc2e; }
+  &.green  { background: #28c840; }
+}
+
+.filename {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  flex: 1;
+  text-align: center;
+}
+
+.langBadge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-teal);
+  background: rgba(0, 196, 167, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+
+// ── Tabs ──
+.tabs {
+  display: flex;
+  gap: 2px;
+  padding: 8px 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: rgba(255,255,255,0.4);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  transition: color var(--transition), background var(--transition);
+  cursor: pointer;
+
+  &.active {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  &:hover:not(.active) {
+    color: rgba(255,255,255,0.6);
+  }
+}
+
+.reviewDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+// ── Body ──
+.body {
+  min-height: 340px;
+}
+
+// ── Code pane ──
+.codePane {
+  display: flex;
+  flex-direction: column;
+}
+
+.pre {
+  margin: 0;
+  padding: 16px 0 0;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.codeLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 1px 0;
+  transition: background var(--transition);
+
+  &.bugLine {
+    background: rgba(248, 113, 113, 0.08);
+    border-left: 2px solid #f87171;
+  }
+}
+
+.lineNo {
+  display: inline-block;
+  width: 40px;
+  text-align: right;
+  padding-right: 16px;
+  color: rgba(255,255,255,0.2);
+  user-select: none;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.lineText {
+  color: rgba(255,255,255,0.75);
+  white-space: pre;
+}
+
+.bugToken {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.15);
+  border-radius: 3px;
+  padding: 0 3px;
+  text-decoration: underline wavy #f87171;
+  text-underline-offset: 3px;
+}
+
+// ── Analyze bar ──
+.analyzeBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.15);
+}
+
+.analyzeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: #fff;
+  background: var(--color-teal);
+  border-radius: var(--radius-full);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0, 196, 167, 0.35);
+  }
+}
+
+.btnIcon { font-style: normal; }
+
+.analyzeHint {
+  font-size: 12px;
+  font-family: var(--font-sans);
+  color: rgba(248, 113, 113, 0.7);
+}
+
+// ── Review pane ──
+.reviewPane {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  padding: 40px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0, 196, 167, 0.2);
+  border-top-color: var(--color-teal);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.reviewOutput {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewLine {
+  font-size: 12.5px;
+  line-height: 1.6;
+  animation: fadeSlide 0.3s ease both;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.type_heading {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 4px;
+}
+
+.type_bug    { color: #f87171; font-weight: 600; }
+.type_fix    { color: #4ade80; font-weight: 600; }
+.type_tip    { color: #fbbf24; font-weight: 600; }
+.type_detail { color: rgba(255,255,255,0.55); padding-left: 4px; }
+.type_code   {
+  color: var(--color-teal);
+  background: rgba(0, 196, 167, 0.08);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  margin: 2px 0;
+}
+.type_score  {
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+
+.hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 4px 0;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: rgba(255,255,255,0.25);
+  padding: 40px;
+}
+
+.resetBtn {
+  margin-top: 16px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: color var(--transition);
+  text-align: left;
+  padding: 4px 0;
+
+  &:hover { color: var(--color-teal); }
+}
