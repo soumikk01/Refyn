@@ -1,92 +1,109 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import React, { useState } from 'react';
 import styles from './Languages.module.scss';
+import { ICON_MAP } from './TechIcons';
 
-const LANGS = [
-  { name: 'TypeScript',  emoji: '🟦', category: 'Frontend' },
-  { name: 'JavaScript',  emoji: '🟨', category: 'Frontend' },
-  { name: 'Python',      emoji: '🐍', category: 'Backend'  },
-  { name: 'Rust',        emoji: '🦀', category: 'Systems'  },
-  { name: 'Go',          emoji: '🐹', category: 'Backend'  },
-  { name: 'Java',        emoji: '☕', category: 'Enterprise' },
-  { name: 'C++',         emoji: '⚙️', category: 'Systems'  },
-  { name: 'C#',          emoji: '💜', category: 'Enterprise' },
-  { name: 'Ruby',        emoji: '💎', category: 'Backend'  },
-  { name: 'PHP',         emoji: '🐘', category: 'Backend'  },
-  { name: 'Swift',       emoji: '🍎', category: 'Mobile'   },
-  { name: 'Kotlin',      emoji: '🟠', category: 'Mobile'   },
-  { name: 'Scala',       emoji: '🔴', category: 'Data'     },
-  { name: 'R',           emoji: '📊', category: 'Data'     },
-  { name: 'SQL',         emoji: '🗄️', category: 'Data'     },
-  { name: 'Shell',       emoji: '🖥️', category: 'DevOps'   },
-  { name: 'Dockerfile',  emoji: '🐳', category: 'DevOps'   },
-  { name: 'Terraform',   emoji: '🏗️', category: 'DevOps'   },
-];
-
-const centerIndex = Math.floor(LANGS.length / 2);
-
-interface LangCardProps {
-  lang: typeof LANGS[0];
-  index: number;
-  centerIndex: number;
-  scrollYProgress: MotionValue<number>;
+interface LangItem {
+  name: string;
+  category: string;
+  brandColor: string;
+  tagline: string;
 }
 
-const AnimatedLangCard = ({ lang, index, centerIndex, scrollYProgress }: LangCardProps) => {
-  const distanceFromCenter = index - centerIndex;
+const LANGS: LangItem[] = [
+  { name: 'TypeScript',  category: 'Frontend',   brandColor: '#3178C6', tagline: 'Typed JS at scale' },
+  { name: 'JavaScript',  category: 'Frontend',   brandColor: '#F7DF1E', tagline: 'Web Standard' },
+  { name: 'Python',      category: 'Backend',    brandColor: '#3776AB', tagline: 'AI & Data Science' },
+  { name: 'Rust',        category: 'Systems',    brandColor: '#F74C00', tagline: 'Memory Safety & Speed' },
+  { name: 'Go',          category: 'Backend',    brandColor: '#00ADD8', tagline: 'Cloud & Concurrency' },
+  { name: 'Java',        category: 'Enterprise', brandColor: '#EA2D2E', tagline: 'Enterprise Scale' },
+  { name: 'C++',         category: 'Systems',    brandColor: '#00599C', tagline: 'High Performance' },
+  { name: 'C#',          category: 'Enterprise', brandColor: '#68217A', tagline: '.NET Ecosystem' },
+  { name: 'Ruby',        category: 'Backend',    brandColor: '#E0115F', tagline: 'Developer Happiness' },
+  { name: 'PHP',         category: 'Backend',    brandColor: '#777BB4', tagline: 'Modern Web Stack' },
+  { name: 'Swift',       category: 'Mobile',     brandColor: '#F05138', tagline: 'iOS & Apple Platforms' },
+  { name: 'Kotlin',      category: 'Mobile',     brandColor: '#7F52FF', tagline: 'Android Native' },
+  { name: 'Scala',       category: 'Data',       brandColor: '#DC322F', tagline: 'Functional Data Engine' },
+  { name: 'R',           category: 'Data',       brandColor: '#276DC3', tagline: 'Statistical Analysis' },
+  { name: 'SQL',         category: 'Data',       brandColor: '#00758F', tagline: 'Relational Database' },
+  { name: 'Shell',       category: 'DevOps',     brandColor: '#4EAA25', tagline: 'Terminal Automation' },
+  { name: 'Dockerfile',  category: 'DevOps',     brandColor: '#2496ED', tagline: 'Container Isolation' },
+  { name: 'Terraform',   category: 'DevOps',     brandColor: '#844FBA', tagline: 'Infrastructure as Code' },
+];
 
-  const x = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    [distanceFromCenter * 35, 0]
-  );
-  const rotate = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    [distanceFromCenter * 12, 0]
-  );
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    [-Math.abs(distanceFromCenter) * 10, 0]
-  );
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.35], [0.2, 1]);
+const ROW_1 = LANGS.slice(0, 9);
+const ROW_2 = LANGS.slice(9, 18);
 
-  return (
-    <motion.div
-      className={styles.langCard}
-      style={{
-        x,
-        rotate,
-        y,
-        scale,
-        opacity,
-        transformOrigin: 'center',
-      }}
-    >
-      <span className={styles.langEmoji} aria-hidden="true">{lang.emoji}</span>
-      <span className={styles.langName}>{lang.name}</span>
-      <span className={styles.langCat}>{lang.category}</span>
-    </motion.div>
-  );
-};
+// Duplicate rows 3 times for continuous seamless marquee flow
+const STREAM_ROW_1 = [...ROW_1, ...ROW_1, ...ROW_1];
+const STREAM_ROW_2 = [...ROW_2, ...ROW_2, ...ROW_2];
 
 export default function Languages() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isSectionHovered, setIsSectionHovered] = useState(false);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState<string | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'center center'],
-  });
+  const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
-  const moreScale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
-  const moreOpacity = useTransform(scrollYProgress, [0, 0.35], [0.2, 1]);
+  const renderIconCard = (lang: LangItem, indexKey: string) => {
+    const IconComponent = ICON_MAP[lang.name];
+    const brandGlow = hexToRgba(lang.brandColor, 0.45);
+
+    return (
+      <div
+        key={indexKey}
+        className={styles.iconCard}
+        style={{
+          '--brand-color': lang.brandColor,
+          '--brand-glow': brandGlow,
+        } as React.CSSProperties}
+        onMouseEnter={() => setHoveredCardIndex(indexKey)}
+        onMouseLeave={() => setHoveredCardIndex(null)}
+      >
+        {/* Dynamic Glowing Aura & Pulse Ring */}
+        <div className={styles.brandAura} />
+        <div className={styles.pulseRing} />
+
+        {/* Realistic Vector Icon */}
+        <div className={styles.iconBox}>
+          {IconComponent ? (
+            <IconComponent size={46} />
+          ) : (
+            <span style={{ fontSize: 32 }}>⚡</span>
+          )}
+        </div>
+
+        {/* Static Card Text */}
+        <span className={styles.staticName}>{lang.name}</span>
+        <span className={styles.staticCat}>{lang.category}</span>
+
+        {/* Cool Hover Animation Tooltip */}
+        <div className={styles.coolTooltip}>
+          <span className={styles.tooltipTitle}>{lang.name}</span>
+          <span className={styles.tooltipTagline}>{lang.tagline}</span>
+          <span className={styles.tooltipCategoryPill}>{lang.category}</span>
+          <div className={styles.tooltipArrow} />
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <section ref={sectionRef} className={styles.section} id="languages" aria-labelledby="langs-heading">
+    <section
+      className={`${styles.section} ${isSectionHovered ? styles.sectionHovered : ''}`}
+      id="languages"
+      aria-labelledby="langs-heading"
+      onMouseEnter={() => setIsSectionHovered(true)}
+      onMouseLeave={() => {
+        setIsSectionHovered(false);
+        setHoveredCardIndex(null);
+      }}
+    >
       {/* Background Video */}
       <video
         autoPlay
@@ -100,46 +117,44 @@ export default function Languages() {
       <div className={styles.topGradient} aria-hidden="true" />
       <div className={styles.bottomGradient} aria-hidden="true" />
 
-      <div className={`container ${styles.content}`}>
+      <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.label}>LANGUAGE SUPPORT</div>
+          <div className={styles.badge}>
+            <span className={`${styles.badgeDot} ${isSectionHovered ? styles.badgeDotActive : ''}`} />
+            <span className={styles.label}>
+              {isSectionHovered ? 'STREAMING ACTIVE' : 'LANGUAGE SUPPORT'}
+            </span>
+          </div>
+
           <h2 className={styles.heading} id="langs-heading">
             Refyn speaks<br />
             <span className={styles.accent}>your language</span>
           </h2>
+
           <p className={styles.subheading}>
             30+ programming languages, frameworks, and config formats. If you write it, Refyn reads it.
           </p>
+
+          <div className={`${styles.interactiveHint} ${isSectionHovered ? styles.interactiveHintActive : ''}`}>
+            {isSectionHovered
+              ? '✨ Hover over any icon to pause & inspect details'
+              : '👉 Move cursor here to scroll icons right-to-left'}
+          </div>
         </div>
 
-        {/* Language grid with 3D scroll parallax */}
-        <div
-          className={styles.grid}
-          style={{ perspective: '500px' }}
-        >
-          {LANGS.map((lang, i) => (
-            <AnimatedLangCard
-              key={i}
-              lang={lang}
-              index={i}
-              centerIndex={centerIndex}
-              scrollYProgress={scrollYProgress}
-            />
-          ))}
-          <motion.div
-            className={`${styles.langCard} ${styles.more}`}
-            style={{
-              opacity: moreOpacity,
-              scale: moreScale,
-            }}
-          >
-            <span className={styles.moreText}>+12 more</span>
-            <span className={styles.moreNote}>& growing</span>
-          </motion.div>
+        {/* Marquee Streaming Rows (Right to Left when Section is Hovered) */}
+        <div className={styles.marqueeContainer}>
+          {/* Row 1: Right-to-Left */}
+          <div className={`${styles.marqueeTrack} ${styles.slideRightToLeft}`}>
+            {STREAM_ROW_1.map((lang, idx) => renderIconCard(lang, `r1-${idx}`))}
+          </div>
+
+          {/* Row 2: Right-to-Left (Slightly alternate speed for dynamic feel) */}
+          <div className={`${styles.marqueeTrack} ${styles.slideRightToLeftFast}`}>
+            {STREAM_ROW_2.map((lang, idx) => renderIconCard(lang, `r2-${idx}`))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
-
