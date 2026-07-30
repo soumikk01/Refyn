@@ -1,6 +1,7 @@
 .section {
   padding: 120px 0 100px;
-  background: var(--color-bg);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
 }
 
 .header {
@@ -30,14 +31,55 @@
 
 .accent { color: var(--color-teal); font-style: italic; }
 
-// ── Steps ──
-.steps {
+// ── Steps Wrapper & Straight Connected Line ──
+.stepsWrap {
   max-width: 780px;
   margin: 0 auto;
+  position: relative;
+}
+
+/* Background straight vertical line track (01 -> 02 -> 03) */
+.timelineTrack {
+  position: absolute;
+  top: 66px;
+  bottom: 66px;
+  left: 26px;
+  width: 3px;
+  background: rgba(0, 196, 167, 0.18);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  @media (max-width: 480px) {
+    left: 20px;
+  }
+}
+
+/* Animated scrolling progress line (grows smoothly down on scroll) */
+.timelineProgress {
+  position: absolute;
+  top: 66px;
+  bottom: 66px;
+  left: 26px;
+  width: 3px;
+  background: linear-gradient(to bottom, #00c4a7 0%, #00ffcc 100%);
+  box-shadow: 0 0 12px rgba(0, 196, 167, 0.6);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  @media (max-width: 480px) {
+    left: 20px;
+  }
+}
+
+/* ── Steps List ── */
+.steps {
   display: flex;
   flex-direction: column;
   gap: 0;
   position: relative;
+  z-index: 3;
 }
 
 .step {
@@ -58,38 +100,44 @@
   }
 }
 
-.connector {
-  // Hidden — borders provide visual separation
-  display: none;
-}
-
 .stepLeft {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 4px;
+  position: relative;
+  z-index: 3;
 }
 
 .stepNumber {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: var(--color-teal-light);
-  border: 2px solid rgba(0, 196, 167, 0.25);
+  background: #ffffff;
+  border: 2px solid var(--color-teal);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-teal-dark);
   letter-spacing: -0.02em;
   flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 196, 167, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   @media (max-width: 480px) {
     width: 40px;
     height: 40px;
     font-size: 12px;
   }
+}
+
+.step:hover .stepNumber {
+  background: var(--color-teal);
+  color: #ffffff;
+  box-shadow: 0 0 24px rgba(0, 196, 167, 0.55);
+  transform: scale(1.12);
 }
 
 .stepRight {

@@ -7,6 +7,13 @@ export const metadata: Metadata = {
     'Refyn uses advanced AI to review your code, explain bugs in plain English, and suggest fixes in real time. Catch issues before they ship.',
   keywords: ['AI code review', 'bug explainer', 'code analysis', 'developer tools', 'AI debugging'],
   authors: [{ name: 'Refyn' }],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     title: 'Refyn — AI Code Reviewer & Bug Explainer',
     description: 'Review smarter. Debug faster. Ship with confidence.',
@@ -28,6 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Website Favicon / URL Logo */}
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
+
         {/* P22 Mackinac W01 Book — display serif (Boomerang-style hero headline) */}
         <link
           rel="stylesheet"

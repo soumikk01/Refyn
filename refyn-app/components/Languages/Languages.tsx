@@ -41,34 +41,12 @@ const STREAM_ROW_2 = [...ROW_2, ...ROW_2, ...ROW_2];
 
 export default function Languages() {
   const [isSectionHovered, setIsSectionHovered] = useState(false);
-  const [hoveredCardIndex, setHoveredCardIndex] = useState<string | null>(null);
-
-  const hexToRgba = (hex: string, alpha: number) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
 
   const renderIconCard = (lang: LangItem, indexKey: string) => {
     const IconComponent = ICON_MAP[lang.name];
-    const brandGlow = hexToRgba(lang.brandColor, 0.45);
 
     return (
-      <div
-        key={indexKey}
-        className={styles.iconCard}
-        style={{
-          '--brand-color': lang.brandColor,
-          '--brand-glow': brandGlow,
-        } as React.CSSProperties}
-        onMouseEnter={() => setHoveredCardIndex(indexKey)}
-        onMouseLeave={() => setHoveredCardIndex(null)}
-      >
-        {/* Dynamic Glowing Aura & Pulse Ring */}
-        <div className={styles.brandAura} />
-        <div className={styles.pulseRing} />
-
+      <div key={indexKey} className={styles.iconCard}>
         {/* Realistic Vector Icon */}
         <div className={styles.iconBox}>
           {IconComponent ? (
@@ -81,14 +59,6 @@ export default function Languages() {
         {/* Static Card Text */}
         <span className={styles.staticName}>{lang.name}</span>
         <span className={styles.staticCat}>{lang.category}</span>
-
-        {/* Cool Hover Animation Tooltip */}
-        <div className={styles.coolTooltip}>
-          <span className={styles.tooltipTitle}>{lang.name}</span>
-          <span className={styles.tooltipTagline}>{lang.tagline}</span>
-          <span className={styles.tooltipCategoryPill}>{lang.category}</span>
-          <div className={styles.tooltipArrow} />
-        </div>
       </div>
     );
   };
@@ -99,10 +69,7 @@ export default function Languages() {
       id="languages"
       aria-labelledby="langs-heading"
       onMouseEnter={() => setIsSectionHovered(true)}
-      onMouseLeave={() => {
-        setIsSectionHovered(false);
-        setHoveredCardIndex(null);
-      }}
+      onMouseLeave={() => setIsSectionHovered(false)}
     >
       {/* Background Video */}
       <video
@@ -134,22 +101,16 @@ export default function Languages() {
           <p className={styles.subheading}>
             30+ programming languages, frameworks, and config formats. If you write it, Refyn reads it.
           </p>
-
-          <div className={`${styles.interactiveHint} ${isSectionHovered ? styles.interactiveHintActive : ''}`}>
-            {isSectionHovered
-              ? '✨ Hover over any icon to pause & inspect details'
-              : '👉 Move cursor here to scroll icons right-to-left'}
-          </div>
         </div>
 
-        {/* Marquee Streaming Rows (Right to Left when Section is Hovered) */}
+        {/* Marquee Streaming Rows */}
         <div className={styles.marqueeContainer}>
           {/* Row 1: Right-to-Left */}
           <div className={`${styles.marqueeTrack} ${styles.slideRightToLeft}`}>
             {STREAM_ROW_1.map((lang, idx) => renderIconCard(lang, `r1-${idx}`))}
           </div>
 
-          {/* Row 2: Right-to-Left (Slightly alternate speed for dynamic feel) */}
+          {/* Row 2: Right-to-Left */}
           <div className={`${styles.marqueeTrack} ${styles.slideRightToLeftFast}`}>
             {STREAM_ROW_2.map((lang, idx) => renderIconCard(lang, `r2-${idx}`))}
           </div>

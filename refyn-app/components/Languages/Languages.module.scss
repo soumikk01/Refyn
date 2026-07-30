@@ -1,12 +1,15 @@
+/* ══════════════════════════════════════════════════════
+   Languages Section — Modern Stream Marquee Layout
+══════════════════════════════════════════════════════ */
+
 .section {
-  padding: 120px 0 110px;
-  background: #07080c;
   position: relative;
+  padding: 120px 0 140px;
+  background: #040508;
   overflow: hidden;
-  user-select: none;
 }
 
-/* ── Background Video & Gradient Overlays ── */
+/* ── Background Video ── */
 .bgVideo {
   position: absolute;
   inset: 0;
@@ -14,27 +17,28 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.65;
-  filter: brightness(0.9) contrast(1.1);
+  opacity: 0.75;
+  filter: contrast(1.15) saturate(1.2);
   pointer-events: none;
-  transition: opacity 0.5s ease;
 }
 
+/* Dark Overlay */
 .videoOverlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(7, 8, 12, 0.2) 0%, rgba(7, 8, 12, 0.88) 100%);
+  background: radial-gradient(circle at center, rgba(4, 5, 8, 0.2) 0%, rgba(4, 5, 8, 0.72) 100%);
   z-index: 1;
   pointer-events: none;
 }
 
+/* Top & Bottom Blend Gradients */
 .topGradient {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 120px;
-  background: linear-gradient(to bottom, #07080c 0%, transparent 100%);
+  background: linear-gradient(to bottom, #040508 0%, transparent 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -45,106 +49,88 @@
   left: 0;
   right: 0;
   height: 120px;
-  background: linear-gradient(to top, #07080c 0%, transparent 100%);
+  background: linear-gradient(to top, #040508 0%, transparent 100%);
   z-index: 2;
   pointer-events: none;
 }
 
+/* Content Container */
 .content {
   position: relative;
   z-index: 3;
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 24px;
 }
 
+/* Section Header */
 .header {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 50px;
+  margin: 0 auto 60px;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: rgba(0, 196, 167, 0.08);
-  border: 1px solid rgba(0, 196, 167, 0.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 20px;
   backdrop-filter: blur(8px);
-  margin-bottom: 24px;
-  transition: all 0.3s ease;
 }
 
 .badgeDot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--color-teal, #00c4a7);
-  box-shadow: 0 0 10px var(--color-teal, #00c4a7);
+  background: #64748b;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .badgeDotActive {
-  background: #00ffcc;
-  box-shadow: 0 0 14px #00ffcc;
-  animation: pulseDot 1.2s infinite alternate;
-}
-
-@keyframes pulseDot {
-  0% { transform: scale(1); opacity: 0.7; }
-  100% { transform: scale(1.4); opacity: 1; }
+  background: var(--color-teal, #00c4a7);
+  box-shadow: 0 0 8px var(--color-teal, #00c4a7);
 }
 
 .label {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--color-teal, #00c4a7);
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-sans, 'Inter', sans-serif);
 }
 
 .heading {
-  font-family: var(--font-serif, Georgia, serif);
-  font-size: clamp(32px, 4.5vw, 56px);
+  font-family: var(--font-serif, 'P22 Mackinac W01 Book', 'Georgia', serif);
+  font-size: 52px;
   font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: #ffffff;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 38px;
+  }
 }
 
 .accent {
-  color: var(--color-teal, #00c4a7);
   font-style: italic;
+  color: var(--color-teal, #00c4a7);
 }
 
 .subheading {
-  font-size: 16.5px;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  font-family: var(--font-sans, 'Inter', sans-serif);
 }
 
-.interactiveHint {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 4px 14px;
-  border-radius: 12px;
-  border: 1px stroke rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
-}
-
-.interactiveHintActive {
-  color: #00ffcc;
-  background: rgba(0, 255, 204, 0.1);
-  border: 1px solid rgba(0, 255, 204, 0.3);
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
-}
-
-/* ── Marquee Container & Tracks ── */
+/* ── Streaming Marquee Container ── */
 .marqueeContainer {
   display: flex;
   flex-direction: column;
@@ -165,7 +151,7 @@
 /* Right-to-Left Keyframe Animation */
 .slideRightToLeft {
   animation: marqueeRightToLeft 30s linear infinite;
-  animation-play-state: paused; /* Runs when mouse is over section */
+  animation-play-state: paused;
 }
 
 .slideRightToLeftFast {
@@ -173,12 +159,7 @@
   animation-play-state: paused;
 }
 
-.slideRightToLeftSlow {
-  animation: marqueeRightToLeft 36s linear infinite;
-  animation-play-state: paused;
-}
-
-/* When Section is Hovered, Icons Move Right to Left! */
+/* When Section is Hovered, Icons Move Right to Left */
 .sectionHovered .marqueeTrack {
   animation-play-state: running;
 }
@@ -192,70 +173,37 @@
   }
 }
 
-/* ── Realistic Icon Card Styling (No Outer Box) ── */
+/* ── Clean Icon Card Styling ── */
 .iconCard {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   padding: 16px 12px;
-  border-radius: 20px;
-  background: transparent;
-  border: none;
-  backdrop-filter: none;
-  cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-style: preserve-3d;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   flex-shrink: 0;
+  transition: border-color 0.2s ease, background 0.2s ease;
 
   &:hover {
-    z-index: 20;
-    background: transparent;
-    border: none;
-    transform: translateY(-8px) scale(1.18);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 }
 
-/* Dynamic Brand Aura behind icon */
-.brandAura {
-  position: absolute;
-  inset: -10px;
-  border-radius: 28px;
-  background: radial-gradient(circle at 50% 50%, var(--brand-glow, rgba(0, 196, 167, 0.5)) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.iconCard:hover .brandAura {
-  opacity: 1;
-}
-
-/* Pulse Ripple Ring on Hover (Disabled for clean box-less layout) */
-.pulseRing {
-  display: none;
-}
-
-/* Icon Wrapper with 3D Hover Scale */
+/* Icon Wrapper */
 .iconBox {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   margin-bottom: 10px;
-  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-}
-
-.iconCard:hover .iconBox {
-  transform: scale(1.22) rotate(-4deg);
-  filter: drop-shadow(0 8px 18px var(--brand-glow, rgba(0, 196, 167, 0.6)));
 }
 
 /* Static Name & Category inside Card */
@@ -265,12 +213,6 @@
   color: #ffffff;
   letter-spacing: -0.01em;
   text-align: center;
-  transition: color 0.3s ease;
-}
-
-.iconCard:hover .staticName {
-  color: var(--brand-color, #00ffcc);
-  text-shadow: 0 0 10px var(--brand-glow, rgba(0, 196, 167, 0.5));
 }
 
 .staticCat {
@@ -280,89 +222,18 @@
   margin-top: 2px;
 }
 
-/* ── Floating Interactive Tooltip / Badge ── */
-.coolTooltip {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(10px) scale(0.85);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px 14px;
-  border-radius: 14px;
-  background: rgba(12, 14, 22, 0.95);
-  border: 1px solid var(--brand-color, rgba(0, 196, 167, 0.6));
-  box-shadow: 
-    0 12px 28px rgba(0, 0, 0, 0.9),
-    0 0 20px var(--brand-glow, rgba(0, 196, 167, 0.3));
-  backdrop-filter: blur(16px);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  white-space: nowrap;
-  z-index: 30;
-}
-
-.iconCard:hover .coolTooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.tooltipTitle {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  background: linear-gradient(135deg, #ffffff 30%, var(--brand-color, #00ffcc) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.tooltipTagline {
-  font-size: 10.5px;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-  margin-top: 2px;
-}
-
-.tooltipCategoryPill {
-  display: inline-block;
-  margin-top: 5px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--brand-color, #00ffcc);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 2px 8px;
-  border-radius: 8px;
-}
-
-/* Tooltip Arrow */
-.tooltipArrow {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid var(--brand-color, rgba(0, 196, 167, 0.6));
-}
-
-/* Grid Fallback / Mobile View */
+/* Mobile View */
 @media (max-width: 768px) {
   .marqueeContainer {
     gap: 16px;
   }
   .iconCard {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     padding: 12px 8px;
   }
   .iconBox {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 }

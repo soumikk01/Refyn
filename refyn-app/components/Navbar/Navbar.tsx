@@ -11,7 +11,6 @@ const navLinks = [
   { label: 'Features',   href: '#features'   },
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Languages',  href: '#languages'  },
-  { label: 'Pricing',    href: '#pricing'    },
 ];
 
 export default function Navbar() {
@@ -44,9 +43,9 @@ export default function Navbar() {
 
         {/* ── CTA + hamburger ── */}
         <div className={styles.actions}>
-          <a href="#pricing" className={styles.ctaSecondary}>
-            View Pricing
-          </a>
+          <button className={styles.ctaSecondary} onClick={openAuthModal}>
+            Sign In
+          </button>
           <button
             className={styles.ctaPrimary}
             onClick={openAuthModal}

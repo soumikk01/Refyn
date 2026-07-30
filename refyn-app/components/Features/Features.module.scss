@@ -1,6 +1,7 @@
 .section {
   padding: 120px 0 100px;
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
   position: relative;
   overflow: hidden;
 
@@ -127,9 +128,22 @@
 }
 
 .cardIcon {
-  font-size: 32px;
-  margin-bottom: 18px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.12) rotate(-3deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .cardTitle {

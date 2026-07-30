@@ -12,8 +12,8 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background: #fff; /* fallback before video loads */
-  padding-bottom: 40px;
+  background: transparent;
+  padding-bottom: 0;
 }
 
 /* ── Foreground container (full height flex column) ── */

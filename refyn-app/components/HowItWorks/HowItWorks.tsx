@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import styles from './HowItWorks.module.scss';
 
 const STEPS = [
@@ -26,6 +29,18 @@ const STEPS = [
 ];
 
 export default function HowItWorks() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start 60%', 'end 75%'],
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 24,
+    restDelta: 0.001,
+  });
+
   return (
     <section className={styles.section} id="how-it-works" aria-labelledby="hiw-heading">
       <div className="container">
@@ -37,28 +52,40 @@ export default function HowItWorks() {
           </h2>
         </div>
 
-        <div className={styles.steps}>
-          {STEPS.map((step, i) => (
-            <div key={i} className={styles.step}>
-              {/* Connector line */}
-              {i < STEPS.length - 1 && <div className={styles.connector} aria-hidden="true" />}
+        {/* Steps Container with scroll target */}
+        <div className={styles.stepsWrap} ref={targetRef}>
+          {/* Straight Vertical Line Track (Background) */}
+          <div className={styles.timelineTrack} aria-hidden="true" />
 
-              <div className={styles.stepLeft}>
-                <div className={styles.stepNumber} aria-hidden="true">{step.number}</div>
-              </div>
+          {/* Animated Glowing Scroll Progress Line (01 -> 02 -> 03) */}
+          <motion.div
+            className={styles.timelineProgress}
+            style={{ scaleY, transformOrigin: 'top' }}
+            aria-hidden="true"
+          />
 
-              <div className={styles.stepRight}>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepDesc}>{step.description}</p>
-                <div className={styles.stepDetail}>{step.detail}</div>
+          <div className={styles.steps}>
+            {STEPS.map((step, i) => (
+              <div key={i} className={styles.step}>
+                <div className={styles.stepLeft}>
+                  <div className={styles.stepNumber} aria-hidden="true">
+                    {step.number}
+                  </div>
+                </div>
+
+                <div className={styles.stepRight}>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <p className={styles.stepDesc}>{step.description}</p>
+                  <div className={styles.stepDetail}>{step.detail}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Bottom CTA */}
         <div className={styles.bottomCta}>
-          <a href="#get-started" className={styles.ctaBtn}>
+          <a href="#live-demo" className={styles.ctaBtn}>
             Start your first review — it&apos;s free
           </a>
           <p className={styles.ctaNote}>No credit card required. Results in seconds.</p>
