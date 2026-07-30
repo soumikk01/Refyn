@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { gsap } from 'gsap';
 import Logo from '@/components/Logo/Logo';
+import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
 import styles from './AuthModal.module.scss';
 
 interface AuthModalProps {
@@ -142,14 +144,16 @@ const CrowdCanvas = ({ src = '/all-peeps.png', rows = 15, cols = 7 }: { src?: st
 ───────────────────────────────────────────────── */
 
 // Backdrop fades in — fast
-const backdropVariants = {
+const backdropVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.18 } },
   exit:    { opacity: 0, transition: { duration: 0.14 } },
 };
 
+const EASE_BEZIER = [0.16, 1, 0.3, 1] as const;
+
 // Card snaps open fast — closes even faster
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.07,
@@ -162,63 +166,65 @@ const cardVariants = {
     transition: {
       delay: 0.04,
       duration: 0.32,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE_BEZIER,
       borderRadius: { delay: 0.1, duration: 0.28 },
     },
   },
   exit: {
     opacity: 0,
     scale: 0.9,
-    transition: { duration: 0.13, ease: 'easeIn' },
+    transition: { duration: 0.13, ease: 'easeIn' as const },
   },
 };
 
 // Left logo piece
-const cornerLVariants = {
+const cornerLVariants: Variants = {
   hidden:   { x: -110, opacity: 0 },
-  visible:  { x: 0, opacity: 1, transition: { delay: 0.02, duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
+  visible:  { x: 0, opacity: 1, transition: { delay: 0.02, duration: 0.28, ease: EASE_BEZIER } },
   exit:     { x: -110, opacity: 0, transition: { duration: 0.1 } },
 };
 
 // Right logo piece
-const cornerRVariants = {
+const cornerRVariants: Variants = {
   hidden:   { y: -90, opacity: 0 },
-  visible:  { y: 0, opacity: 1, transition: { delay: 0.08, duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
+  visible:  { y: 0, opacity: 1, transition: { delay: 0.08, duration: 0.28, ease: EASE_BEZIER } },
   exit:     { y: -90, opacity: 0, transition: { duration: 0.1 } },
 };
 
 // Brand logo above card
-const brandVariants = {
+const brandVariants: Variants = {
   hidden:   { opacity: 0, y: -24, scale: 0.9 },
   visible:  {
     opacity: 1, y: 0, scale: 1,
-    transition: { delay: 0.22, duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 0.22, duration: 0.32, ease: EASE_BEZIER },
   },
   exit:     { opacity: 0, y: -10, transition: { duration: 0.1 } },
 };
 
 // Header fades in
-const headerVariants = {
+const headerVariants: Variants = {
   hidden:   { opacity: 0, y: 8 },
-  visible:  { opacity: 1, y: 0, transition: { delay: 0.26, duration: 0.28, ease: [0.16, 1, 0.3, 1] } },
+  visible:  { opacity: 1, y: 0, transition: { delay: 0.26, duration: 0.28, ease: EASE_BEZIER } },
 };
 
 // Buttons stagger up — faster
-const bodyVariants = {
+const bodyVariants: Variants = {
   hidden:   {},
   visible:  { transition: { staggerChildren: 0.08, delayChildren: 0.34 } },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden:   { opacity: 0, y: 14 },
-  visible:  { opacity: 1, y: 0, transition: { duration: 0.26, ease: [0.16, 1, 0.3, 1] } },
+  visible:  { opacity: 1, y: 0, transition: { duration: 0.26, ease: EASE_BEZIER } },
 };
 
 /* ─────────────────────────────────────────────────
    AuthModal Component
 ───────────────────────────────────────────────── */
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const router = useRouter();
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape' && isOpen) onClose(); };
@@ -227,18 +233,41 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.overflow = (isOpen || isLoading) ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [isOpen]);
+  }, [isOpen, isLoading]);
 
   const resetAndClose = () => {
     onClose();
-    setTimeout(() => setSubmitted(false), 300);
+    setTimeout(() => {
+      setSubmitted(false);
+      setIsLoading(false);
+    }, 300);
+  };
+
+  const handleOAuthClick = () => {
+    setSubmitted(true);
+    setTimeout(() => {
+      onClose();
+      setIsLoading(true);
+      setTimeout(() => {
+        router.push('/compiler');
+        setTimeout(() => {
+          setIsLoading(false);
+          setSubmitted(false);
+        }, 500);
+      }, 1300);
+    }, 400);
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen message="Entering Refyn Compiler Workspace…" />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isOpen && (
         <div className={styles.overlayWrapper}>
           {/* ── Deep dark backdrop ── */}
           <motion.div
@@ -342,7 +371,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   <motion.button
                     variants={itemVariants}
                     className={styles.oauthBtn}
-                    onClick={() => setSubmitted(true)}
+                    onClick={handleOAuthClick}
                   >
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
                       <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -354,7 +383,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   <motion.button
                     variants={itemVariants}
                     className={styles.oauthBtn}
-                    onClick={() => setSubmitted(true)}
+                    onClick={handleOAuthClick}
                   >
                     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -371,5 +400,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         </div>
       )}
     </AnimatePresence>
+    </>
   );
 }
