@@ -31,7 +31,6 @@
 - [🚀 How To Run (Commands & Setup)](#-how-to-run-commands--setup)
 - [👥 Our Team & Leadership](#-our-team--leadership)
 - [📜 License](#-license)
-- [🔒 Security & Contact](#-security--contact)
 
 ---
 
@@ -228,13 +227,3 @@ Unauthorized duplication, redistribution, or commercial resale of the
 Refyn proprietary design system, branding assets, and AI inference logic 
 without explicit written permission from Refyn Technologies Inc. is strictly prohibited.
 ```
-
----
-
-## 🔒 Security & Contact
-
-- **Company**: Refyn Technologies Inc.
-- **Official Website**: [https://refyn.app](https://refyn.app)
-- **General Inquiries**: `contact@refyn.app`
-- **Security & Support**: `security@refyn.app`
-- **Copyright**: © 2026 Refyn Technologies Inc. All rights reserved.
