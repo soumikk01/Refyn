@@ -1,66 +1,36 @@
-/* ══════════════════════════════════════════════════════
-   Compiler Workspace Dashboard — Refyn Design Language
-══════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════
+   Refyn Compiler & AI Workspace Styles
+   Dual View: Language Grid (Picture 1) + AI Code Editor (Picture 2)
+════════════════════════════════════════════════════════════════ */
 
-.page {
+.appContainer {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PICTURE 1: LANGUAGE SELECTOR GRID PAGE STYLES
+════════════════════════════════════════════════════════════════ */
+
+.gridViewPage {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(180deg, #d6e2eb 0%, #c8d6e5 100%);
+  background: linear-gradient(180deg, #d8e5ee 0%, #c8d6e3 100%);
   color: #0f172a;
   font-family: var(--font-sans, 'Inter', sans-serif);
   padding-bottom: 80px;
 }
 
-/* ── Top Announcement Banner ── */
-.banner {
-  background: linear-gradient(90deg, rgba(0, 196, 167, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
-  border-bottom: 1px solid rgba(0, 196, 167, 0.2);
-  padding: 8px 16px;
-  text-align: center;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.bannerContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.sparkleIcon {
-  color: #00ffcc;
-  display: flex;
-  align-items: center;
-}
-
-.tryBtn {
-  background: rgba(0, 196, 167, 0.2);
-  border: 1px solid rgba(0, 196, 167, 0.4);
-  color: #00ffcc;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(0, 196, 167, 0.4);
-    transform: translateX(2px);
-  }
-}
-
-/* ── Navbar ── */
-.navbar {
+.navHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 32px;
+  padding: 16px 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(14px);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -69,7 +39,6 @@
 .navLeft {
   display: flex;
   align-items: center;
-  gap: 24px;
 }
 
 .logoLink {
@@ -103,22 +72,21 @@
   text-decoration: none;
   padding: 6px 14px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 196, 167, 0.3);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 196, 167, 0.35);
   backdrop-filter: blur(8px);
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-color: rgba(0, 196, 167, 0.6);
   }
 }
 
-/* ── Hero Section ── */
 .heroSection {
   text-align: center;
   max-width: 960px;
-  margin: 40px auto 40px;
+  margin: 40px auto 36px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
@@ -130,7 +98,7 @@
   align-items: center;
   gap: 10px;
   padding: 6px 16px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(0, 196, 167, 0.35);
   border-radius: 999px;
   font-size: 13px;
@@ -142,7 +110,7 @@
   transition: all 0.25s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     border-color: rgba(0, 196, 167, 0.6);
     transform: translateY(-2px);
   }
@@ -165,7 +133,7 @@
 }
 
 .heroTitle {
-  font-size: clamp(32px, 4.5vw, 54px);
+  font-size: clamp(34px, 4.5vw, 56px);
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 16px;
@@ -184,15 +152,9 @@
   color: rgba(15, 23, 42, 0.7);
   line-height: 1.5;
   max-width: 900px;
-  white-space: nowrap;
-  margin: 0 auto 36px;
-
-  @media (max-width: 850px) {
-    white-space: normal;
-  }
+  margin: 0 auto 32px;
 }
 
-/* Search bar */
 .searchWrap {
   position: relative;
   max-width: 620px;
@@ -211,8 +173,8 @@
 .searchInput {
   width: 100%;
   padding: 16px 20px 16px 50px;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(14px);
   border-radius: 999px;
   color: #0f172a;
@@ -226,13 +188,12 @@
   }
 
   &:focus {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-color: rgba(0, 196, 167, 0.6);
     box-shadow: 0 8px 32px rgba(0, 196, 167, 0.15);
   }
 }
 
-/* Tabs */
 .categoryTabs {
   display: flex;
   align-items: center;
@@ -240,7 +201,7 @@
   gap: 8px;
   flex-wrap: wrap;
   padding: 6px;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.7);
@@ -271,9 +232,8 @@
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
 }
 
-/* ── Grid Section ── */
 .gridSection {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 20px 24px;
 }
@@ -284,13 +244,12 @@
   gap: 16px;
 }
 
-/* Language card */
 .langCard {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 16px;
-  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -299,7 +258,7 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     border-color: rgba(0, 196, 167, 0.5);
     transform: translateY(-3px);
     box-shadow: 0 12px 36px rgba(0, 196, 167, 0.16);
@@ -319,7 +278,7 @@
 }
 
 .langName {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: #0f172a;
@@ -343,7 +302,7 @@
 
 .tagline {
   font-size: 12px;
-  color: rgba(15, 23, 42, 0.55);
+  color: rgba(15, 23, 42, 0.6);
   font-weight: 500;
   line-height: 1.4;
 }
@@ -364,117 +323,649 @@
   flex-shrink: 0;
 }
 
-/* ── Interactive Compiler Modal ── */
-.compilerModal {
+/* ════════════════════════════════════════════════════════════════
+   PICTURE 2: FULL-SCREEN AI CODE WORKSPACE STYLES
+════════════════════════════════════════════════════════════════ */
+
+.workspacePage {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 500;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-
-.compilerBackdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-}
-
-.compilerCard {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 1000px;
-  background: #0c0f1d;
-  border: 1px solid rgba(0, 196, 167, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 196, 167, 0.2);
+  flex-direction: column;
+  background: #050811;
+  color: #e2e8f0;
+  font-family: var(--font-sans, 'Inter', sans-serif);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  max-height: 85vh;
 }
 
-.modalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.03);
+/* ── Top Bar ── */
+.wsHeader {
+  height: 52px;
+  background: #080c16;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.modalTitle {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-.closeModal {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(248, 113, 113, 0.2);
-    color: #f87171;
-  }
-}
-
-.modalBody {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  flex: 1;
-  min-height: 480px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.editorBox,
-.outputBox {
-  display: flex;
-  flex-direction: column;
-}
-
-.editorBox {
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.boxHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
+  padding: 0 16px;
+  user-select: none;
+  flex-shrink: 0;
 }
 
-.runCodeBtn {
+.wsHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wsLogoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.wsBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bcFolder {
+  color: #00ffcc;
+  font-weight: 600;
+}
+
+.bcSep {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bcFile {
+  color: #94a3b8;
+}
+
+/* Language Dropdown */
+.langDropdownWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  position: relative;
+}
+
+.langSelect {
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 14px;
+}
+
+.selectArrow {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.wsHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnRunCode {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
   border-radius: 6px;
   background: #00c4a7;
-  color: #000000;
+  color: #020b0a;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #00ffcc;
+    transform: scale(1.02);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btnAiReview {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: rgba(0, 196, 167, 0.15);
+  border: 1px solid rgba(0, 196, 167, 0.4);
+  color: #00ffcc;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 196, 167, 0.3);
+  }
+}
+
+.pulseBtn {
+  animation: aiPulse 1s infinite alternate;
+}
+
+@keyframes aiPulse {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+.iconControlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+}
+
+.btnExit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.25);
+  }
+}
+
+/* ── Main Workspace Body ── */
+.wsBody {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* 1. Left Icon Dock Bar */
+.iconDock {
+  width: 48px;
+  background: #060912;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.dockIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #38bdf8;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.activeDockIcon {
+  color: #00ffcc;
+  background: rgba(0, 255, 204, 0.1);
+  border-left: 2px solid #00ffcc;
+}
+
+/* 2. Left Explorer Drawer Panel */
+.explorerDrawer {
+  width: 220px;
+  background: #080c17;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  user-select: none;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.expHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.plusIcon {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.expSection {
+  padding: 8px 0;
+}
+
+.secTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+}
+
+.fileTree {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.treeItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 28px;
+  font-size: 13px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #f1f5f9;
+  }
+}
+
+.activeItem {
+  background: rgba(0, 196, 167, 0.12);
+  color: #00ffcc;
+  font-weight: 600;
+}
+
+.tsColor { color: #3178c6; }
+.utilsColor { color: #f7df1e; }
+.mdColor { color: #38bdf8; }
+
+/* 3. Center Code Editor Panel */
+.editorPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #090e18;
+  overflow: hidden;
+}
+
+.editorTabs {
+  display: flex;
+  align-items: center;
+  background: #060a12;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+}
+
+.editorTab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: #64748b;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+
+  &:hover {
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.activeTab {
+  background: #090e18;
+  color: #00ffcc;
+  font-weight: 600;
+  border-top: 2px solid #00ffcc;
+}
+
+.editorCodeArea {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.lineNumbers {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 10px;
+  background: #070b13;
+  color: #475569;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13.5px;
+  line-height: 1.6;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.codeTextArea {
+  flex: 1;
+  background: #090e18;
+  color: #67e8f9;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  white-space: pre;
+  tab-size: 2;
+
+  &::selection {
+    background: rgba(0, 196, 167, 0.3);
+  }
+}
+
+/* Bottom CLI Terminal Panel */
+.cliTerminalPanel {
+  height: 170px;
+  background: #04060c;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.cliHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: #070a13;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.cliTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clearLogsBtn {
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #f1f5f9;
+  }
+}
+
+.cliBody {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12.5px;
+  color: #34d399;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cliLine {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.cliForm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #030509;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cliPromptSymbol {
+  color: #00ffcc;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cliInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f1f5f9;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* 4. Right AI Reviewer Panel */
+.aiPanel {
+  width: 320px;
+  background: #070b14;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.aiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #090e1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.aiTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.tealZap {
+  color: #00ffcc;
+}
+
+.solBadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #00ffcc;
+  background: rgba(0, 255, 204, 0.12);
+  border: 1px solid rgba(0, 255, 204, 0.3);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.aiContent {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+/* Score Card */
+.scoreCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 196, 167, 0.25);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.scoreTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.scoreVal {
+  font-size: 22px;
+  font-weight: 800;
+  color: #00ffcc;
+}
+
+.scoreLbl {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.scoreBarTrack {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.scoreBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00c4a7 0%, #00ffcc 100%);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.scoreStats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Findings Card */
+.auditFindingsCard,
+.refactorCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.cardSecHeading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.findingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+  }
+}
+
+.checkIcon {
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.refactorDesc {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.btnApplyFix {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #00c4a7;
+  color: #020b0a;
   border: none;
   font-size: 12px;
   font-weight: 700;
@@ -483,61 +974,59 @@
 
   &:hover {
     background: #00ffcc;
-    transform: scale(1.03);
+    transform: translateY(-1px);
   }
 }
 
-.codeArea {
-  flex: 1;
-  width: 100%;
-  background: #070912;
-  color: #a7f3d0;
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 14px;
-  padding: 16px;
-  border: none;
-  outline: none;
-  resize: none;
-  line-height: 1.6;
-}
-
-.outputBox {
-  background: #05060b;
-}
-
-.fynBadge {
-  font-size: 11px;
-  color: #00ffcc;
-  background: rgba(0, 255, 204, 0.1);
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
-}
-
-.consoleArea {
-  flex: 1;
-  padding: 16px;
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 13.5px;
-}
-
-.emptyOutput {
-  color: rgba(255, 255, 255, 0.3);
-  font-style: italic;
-}
-
-.loadingOutput {
-  color: #38bdf8;
-  animation: blink 1s infinite alternate;
-}
-
-@keyframes blink {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
-}
-
-.outputPre {
+.appliedFix {
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.5);
   color: #34d399;
-  white-space: pre-wrap;
-  margin: 0;
+}
+
+/* Bottom AI Chat Bar */
+.aiChatBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #050811;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.aiChatInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #f1f5f9;
+  font-size: 12px;
+  outline: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:focus {
+    border-color: rgba(0, 196, 167, 0.5);
+  }
+}
+
+.btnSendAi {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #00c4a7;
+  color: #020b0a;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #00ffcc;
+  }
 }
