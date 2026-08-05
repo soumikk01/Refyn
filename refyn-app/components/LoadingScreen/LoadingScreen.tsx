@@ -8,17 +8,17 @@ interface LoadingScreenProps {
   message?: string;
 }
 
-export default function LoadingScreen({ message = 'Loading Refyn Workspace...' }: LoadingScreenProps) {
+export default function LoadingScreen({ message }: LoadingScreenProps) {
   return (
     <motion.div
       className={styles.overlay}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.25 }}
     >
+      {/* Only the logo mark — no text, perfectly centered */}
       <div className={styles.centerContainer}>
-        {/* Vector Line Drawing Logo Creation Animation */}
         <div className={styles.logoWrapper}>
           <svg
             width="120"
@@ -26,64 +26,53 @@ export default function LoadingScreen({ message = 'Loading Refyn Workspace...' }
             viewBox="0 0 40 40"
             fill="none"
             className={styles.animatedSvgMark}
+            aria-label="Refyn"
           >
             <defs>
-              <linearGradient id="loadTealGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <linearGradient id="ls_tealGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#00ffcc" />
                 <stop offset="0.5" stopColor="#00c4a7" />
                 <stop offset="1" stopColor="#008f7a" />
               </linearGradient>
-              <linearGradient id="loadDarkTeal" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+              <linearGradient id="ls_darkTeal" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#00c4a7" />
                 <stop offset="1" stopColor="#007564" />
               </linearGradient>
-              <filter id="loadGlow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="4" stdDeviation="8" floodColor="#00ffcc" floodOpacity="0.8" />
+              <filter id="ls_glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="0" stdDeviation="5" floodColor="#00ffcc" floodOpacity="0.9" />
               </filter>
             </defs>
-            <g filter="url(#loadGlow)">
-              {/* Primary Chevron Stroke Draw & Fill */}
+            <g filter="url(#ls_glow)">
               <path
                 d="M 4 4 L 28 4 L 28 24 L 16 36 L 16 16 L 4 16 Z"
-                fill="url(#loadTealGrad)"
+                fill="url(#ls_tealGrad)"
                 stroke="#00ffcc"
-                strokeWidth="1.5"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
                 className={styles.drawPath1}
               />
-              {/* Facet 2 Stroke Draw & Fill */}
               <path
                 d="M 20 4 L 36 4 L 36 20 L 28 28 L 28 4 Z"
-                fill="url(#loadDarkTeal)"
+                fill="url(#ls_darkTeal)"
                 stroke="#00c4a7"
-                strokeWidth="1.5"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
                 className={styles.drawPath2}
               />
-              {/* Inner Facet 3 Stroke Draw & Fill */}
               <path
                 d="M 16 16 L 28 16 L 28 28 Z"
-                fill="rgba(255,255,255,0.4)"
-                stroke="#ffffff"
-                strokeWidth="1"
+                fill="rgba(255,255,255,0.42)"
+                stroke="rgba(255,255,255,0.8)"
+                strokeWidth="0.8"
+                strokeLinejoin="round"
                 className={styles.drawPath3}
               />
             </g>
           </svg>
-        </div>
 
-        {message && (
-          <p
-            style={{
-              marginTop: '1.5rem',
-              color: '#a0aec0',
-              fontSize: '0.95rem',
-              fontWeight: 500,
-              letterSpacing: '0.04em',
-              textAlign: 'center',
-            }}
-          >
-            {message}
-          </p>
-        )}
+          {/* Thin spinning ring */}
+          <div className={styles.spinRing} aria-hidden="true" />
+        </div>
       </div>
     </motion.div>
   );
