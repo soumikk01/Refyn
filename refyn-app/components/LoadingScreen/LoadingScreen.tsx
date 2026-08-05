@@ -4,7 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './LoadingScreen.module.scss';
 
-export default function LoadingScreen() {
+interface LoadingScreenProps {
+  message?: string;
+}
+
+export default function LoadingScreen({ message = 'Loading Refyn Workspace...' }: LoadingScreenProps) {
   return (
     <motion.div
       className={styles.overlay}
@@ -65,6 +69,21 @@ export default function LoadingScreen() {
             </g>
           </svg>
         </div>
+
+        {message && (
+          <p
+            style={{
+              marginTop: '1.5rem',
+              color: '#a0aec0',
+              fontSize: '0.95rem',
+              fontWeight: 500,
+              letterSpacing: '0.04em',
+              textAlign: 'center',
+            }}
+          >
+            {message}
+          </p>
+        )}
       </div>
     </motion.div>
   );

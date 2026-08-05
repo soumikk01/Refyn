@@ -1,20 +1,63 @@
 import React, { useId } from 'react';
 
 interface LogoProps {
-  size?: 'sm' | 'md' | 'lg';
-  variant?: 'default' | 'white';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'default' | 'white' | 'icon-only';
+  showText?: boolean;
 }
 
-export default function Logo({ size = 'md', variant = 'default' }: LogoProps) {
-  const heights: Record<string, number> = { sm: 28, md: 36, lg: 52 };
-  const h = heights[size];
-  const textColor = variant === 'white' ? '#ffffff' : '#0d0d0d';
+export default function Logo({ size = 'md', variant = 'default', showText = true }: LogoProps) {
+  const heights: Record<string, number> = { sm: 28, md: 36, lg: 48, xl: 60 };
+  const h = heights[size] || 36;
+  const textColor = variant === 'white' ? '#ffffff' : '#ffffff';
   const idPrefix = useId().replace(/:/g, '');
 
   const wordGradId = `wordGrad_${idPrefix}_${variant}`;
   const tealGradId = `tealGrad_${idPrefix}_${variant}`;
   const darkTealId = `darkTeal_${idPrefix}_${variant}`;
   const glowFilterId = `glow_${idPrefix}_${variant}`;
+
+  if (variant === 'icon-only' || !showText) {
+    return (
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          height: h,
+          userSelect: 'none',
+        }}
+      >
+        <svg
+          height={h}
+          width={h}
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="Refyn Logo Icon"
+        >
+          <defs>
+            <linearGradient id={tealGradId} x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#00ffcc" />
+              <stop offset="0.5" stopColor="#00c4a7" />
+              <stop offset="1" stopColor="#008f7a" />
+            </linearGradient>
+            <linearGradient id={darkTealId} x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#00c4a7" />
+              <stop offset="1" stopColor="#006b5c" />
+            </linearGradient>
+            <filter id={glowFilterId} x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#00c4a7" floodOpacity="0.5" />
+            </filter>
+          </defs>
+          <g filter={`url(#${glowFilterId})`}>
+            <path d="M 4 4 L 28 4 L 28 24 L 16 36 L 16 16 L 4 16 Z" fill={`url(#${tealGradId})`} />
+            <path d="M 20 4 L 36 4 L 36 20 L 28 28 L 28 4 Z" fill={`url(#${darkTealId})`} />
+            <path d="M 16 16 L 28 16 L 28 28 Z" fill="rgba(255,255,255,0.35)" />
+          </g>
+        </svg>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -62,7 +105,6 @@ export default function Logo({ size = 'md', variant = 'default' }: LogoProps) {
 
         {/* ── Wordmark Group with Glow ── */}
         <g filter={`url(#${glowFilterId})`}>
-
           {/*
             ── CONTINUOUS SINGLE-STROKE PATH FROM CAPITAL 'R' LEG TO 'y' ──
           */}
@@ -119,7 +161,6 @@ export default function Logo({ size = 'md', variant = 'default' }: LogoProps) {
             d="M 106.5 16.5 H 111 V 19.5 C 112.5 17.3 115 16 118.5 16 C 124 16 126.5 19 126.5 24.5 V 37.5 H 122 V 25.5 C 122 22 120.3 20 117 20 C 113.5 20 111 22.5 111 27 V 37.5 H 106.5 V 16.5 Z"
             fill={`url(#${tealGradId})`}
           />
-
         </g>
 
         {/* ── Refyn Geometric Double Chevron Mark ── */}

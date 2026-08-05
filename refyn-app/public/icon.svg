@@ -1,5 +1,21 @@
-<svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M4 4 L28 4 L28 24 L16 36 L16 16 L4 16 Z" fill="#00c4a7" />
-  <path d="M20 4 L36 4 L36 20 L28 28 L28 4 Z" fill="#009e88" />
-  <path d="M16 16 L28 16 L28 28 Z" fill="rgba(255,255,255,0.22)" />
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="refynIconGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00ffcc" />
+      <stop offset="50%" stop-color="#00c4a7" />
+      <stop offset="100%" stop-color="#008f7a" />
+    </linearGradient>
+    <linearGradient id="refynIconDarkGrad" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00c4a7" />
+      <stop offset="100%" stop-color="#006b5c" />
+    </linearGradient>
+    <filter id="refynIconGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00c4a7" flood-opacity="0.5" />
+    </filter>
+  </defs>
+  <g filter="url(#refynIconGlow)">
+    <path d="M 4 4 L 28 4 L 28 24 L 16 36 L 16 16 L 4 16 Z" fill="url(#refynIconGrad)" />
+    <path d="M 20 4 L 36 4 L 36 20 L 28 28 L 28 4 Z" fill="url(#refynIconDarkGrad)" />
+    <path d="M 16 16 L 28 16 L 28 28 Z" fill="rgba(255,255,255,0.35)" />
+  </g>
 </svg>

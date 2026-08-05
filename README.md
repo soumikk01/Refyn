@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://refyn.app">
-    <img src="public/logo.svg" alt="Refyn Logo" width="320" />
+    <img src="refyn-app/public/logo.svg" alt="Refyn Logo" width="320" />
   </a>
 </p>
 
