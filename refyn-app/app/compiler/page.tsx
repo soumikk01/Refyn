@@ -724,6 +724,95 @@ function TypewriterText({ text }: { text: string }) {
   return <span>{displayed}</span>;
 }
 
+function UserProfileDropdown({ onExit }: { onExit?: () => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className={styles.userProfileWrap} ref={dropdownRef}>
+      <button
+        className={styles.userAvatarBtn}
+        onClick={() => setIsOpen((prev) => !prev)}
+        title="User Profile & Settings"
+      >
+        <div className={styles.avatarCircle}>
+          <span>AD</span>
+          <span className={styles.onlineBadge} />
+        </div>
+      </button>
+
+      {isOpen && (
+        <div className={styles.profileCardModal}>
+          <div className={styles.profileCardHeader}>
+            <div className={styles.profileAvatarLarge}>
+              <span>AD</span>
+              <span className={styles.onlineBadgeLarge} />
+            </div>
+            <div className={styles.profileInfo}>
+              <h4 className={styles.profileName}>Alex Developer</h4>
+              <span className={styles.profileEmail}>alex.dev@refyn.ai</span>
+              <span className={styles.proPlanBadge}>PRO Plan • Sol 4.0 Active</span>
+            </div>
+            <button
+              className={styles.btnCloseProfile}
+              onClick={() => setIsOpen(false)}
+              title="Close Profile Card"
+            >
+              <X size={14} />
+            </button>
+          </div>
+
+          <div className={styles.profileStatsRow}>
+            <div className={styles.statBox}>
+              <span className={styles.statNum}>42</span>
+              <span className={styles.statLbl}>Repos</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statNum}>128</span>
+              <span className={styles.statLbl}>AI Reviews</span>
+            </div>
+            <div className={styles.statBox}>
+              <span className={styles.statNum}>98%</span>
+              <span className={styles.statLbl}>Quality</span>
+            </div>
+          </div>
+
+          <div className={styles.profileActions}>
+            <button className={styles.profileActionBtn}>
+              <Sliders size={14} />
+              <span>Workspace Preferences</span>
+            </button>
+            <button className={styles.profileActionBtn}>
+              <ShieldCheck size={14} />
+              <span>API Key & Billing</span>
+            </button>
+            <button
+              className={styles.profileExitBtn}
+              onClick={() => {
+                setIsOpen(false);
+                if (onExit) onExit();
+              }}
+            >
+              <RotateCcw size={14} />
+              <span>Exit Workspace / Logout</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CompilerContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -1257,6 +1346,9 @@ function CompilerContent() {
                 <Link href="/" className={styles.backBtn}>
                   ← Back to Home
                 </Link>
+
+                {/* User Profile Avatar & Card Dropdown */}
+                <UserProfileDropdown onExit={() => router.push('/')} />
               </div>
             </header>
 
@@ -1404,6 +1496,9 @@ function CompilerContent() {
                   <X size={16} />
                   <span>Exit</span>
                 </button>
+
+                {/* User Profile Avatar Dropdown in Workspace */}
+                <UserProfileDropdown onExit={handleExitWorkspace} />
               </div>
             </div>
 
