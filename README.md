@@ -1,106 +1,123 @@
 <p align="center">
   <a href="https://refyn.app">
-    <img src="refyn-app/public/logo.svg" alt="Refyn Logo" width="320" />
+    <img src="refyn-app/public/logo.svg" alt="Refyn Logo" width="340" />
   </a>
 </p>
 
-<h1 align="center">Refyn — AI Code Reviewer & Bug Explainer</h1>
+<h1 align="center">Refyn — AI Code Reviewer & Automated Bug Explainer</h1>
 
 <p align="center">
-  <strong>Review smarter. Debug faster. Ship clean code with confidence.</strong>
+  <strong>Review smarter. Debug faster. Ship clean code with enterprise confidence.</strong>
 </p>
 
 <p align="center">
-  <a href="#-about-refyn"><img src="https://img.shields.io/badge/Next.js-16.2.12-black?style=for-the-badge&logo=next.js" alt="Next.js"></a>
-  <a href="#-about-refyn"><img src="https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react" alt="React"></a>
-  <a href="#-about-refyn"><img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript"></a>
-  <a href="#-about-refyn"><img src="https://img.shields.io/badge/Sass-SCSS-CC6699?style=for-the-badge&logo=sass" alt="Sass"></a>
-  <a href="#-about-refyn"><img src="https://img.shields.io/badge/License-Proprietary-00c4a7?style=for-the-badge" alt="License"></a>
+  <a href="https://refyn.app"><img src="https://img.shields.io/badge/Website-refyn.app-00c4a7?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Refyn Website"></a>
+  <a href="#-what-work-platform-overview"><img src="https://img.shields.io/badge/Next.js-16.2.12-black?style=for-the-badge&logo=next.js" alt="Next.js"></a>
+  <a href="#-what-work-platform-overview"><img src="https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react" alt="React"></a>
+  <a href="#-what-work-platform-overview"><img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript"></a>
+  <a href="#-what-work-platform-overview"><img src="https://img.shields.io/badge/Sass-SCSS-CC6699?style=for-the-badge&logo=sass" alt="Sass"></a>
+  <a href="#-license"><img src="https://img.shields.io/badge/License-Proprietary-00ffcc?style=for-the-badge" alt="License"></a>
 </p>
 
 ---
 
 ## 📋 Table of Contents
 
-- [✨ About Refyn](#-about-refyn)
-- [🎨 Brand Identity & Logo Specifications](#-brand-identity--logo-specifications)
-- [⚡ What To Do (Quickstart & Setup)](#-what-to-do-quickstart--setup)
-- [🚀 How To Run (Execution Commands)](#-how-to-run-execution-commands)
-- [🛠️ How To Work (Architecture & Engineering Workflow)](#-how-to-work-architecture--engineering-workflow)
-- [📌 What To Work On (Product Roadmap & Task Backlog)](#-what-to-work-on-product-roadmap--task-backlog)
-- [🌐 Deployment & CI/CD](#-deployment--cicd)
+- [🌐 Website Logo & Corporate Identity](#-website-logo--corporate-identity)
+- [✨ What Work (Platform Overview & Features)](#-what-work-platform-overview--features)
+- [⚙️ How To Work (Execution Engine & Architecture)](#-how-to-work-execution-engine--architecture)
+- [⚡ What Need (Prerequisites & Dependencies)](#-what-need-prerequisites--dependencies)
+- [📂 File Structure (Complete Project Map)](#-file-structure-complete-project-map)
+- [🚀 How To Run (Commands & Setup)](#-how-to-run-commands--setup)
+- [👥 Our Team & Leadership](#-our-team--leadership)
+- [📜 License](#-license)
 - [🔒 Security & Contact](#-security--contact)
 
 ---
 
-## ✨ About Refyn
+## 🌐 Website Logo & Corporate Identity
 
-**Refyn** is an enterprise-grade AI-powered code reviewing and bug explanation platform built for modern software developers, engineering teams, and tech leaders. Refyn analyzes source code across **30+ programming languages**, detecting bugs, security vulnerabilities, performance bottlenecks, and style antipatterns before they reach production.
+Refyn’s corporate brand identity embodies speed, intelligence, and modern developer aesthetics.
 
-### Key Capabilities
+<p align="center">
+  <img src="refyn-app/public/logo.svg" alt="Refyn Corporate Brand Logo" width="400" />
+</p>
 
-- 🔍 **Automated AI Code Review**: Instant, line-by-line analysis for syntax errors, logic flaws, memory leaks, and security risks.
-- 💡 **Plain-English Bug Explanations**: Converts complex compiler errors and stack traces into actionable, step-by-step resolution guides.
-- ⚡ **Interactive Multi-Language Compiler & Sandbox**: Test, run, debug, and optimize code snippets in real time within a modern web environment (`/compiler`).
-- 🎯 **IDE & Workflow Integration**: Designed for seamless integration with GitHub, VS Code, and automated CI/CD pipelines.
-- 💎 **Premium Modern UI**: Built with ambient backdrops, dark-mode glassmorphism, SCSS layout modules, and smooth Framer Motion micro-interactions.
-
----
-
-## 🎨 Brand Identity & Logo Specifications
-
-Refyn’s brand identity represents speed, precision, and technological intelligence.
-
-### Brand Logo & Vector Assets
-
-- **Full Corporate Logo**: [`public/logo.svg`](file:///c:/Users/soumi/Refyn/refyn-app/public/logo.svg) — Continuous-stroke geometric wordmark with ambient neon teal glow filter and double chevron mark.
-- **Favicon & Web Icon**: [`public/icon.svg`](file:///c:/Users/soumi/Refyn/refyn-app/public/icon.svg) & [`app/icon.svg`](file:///c:/Users/soumi/Refyn/refyn-app/app/icon.svg) — 40x40 vector chevron spark emblem optimized for browser tabs, mobile bookmarks, and launcher icons.
-- **High-Res Icon Mark**: [`public/logo-icon.svg`](file:///c:/Users/soumi/Refyn/refyn-app/public/logo-icon.svg) — High-definition standalone icon asset for social media previews (OpenGraph) and app cards.
-
-### Color Palette & Design System
-
-| Token Name               | Hex Code                | Purpose / Usage                                                          |
-| :----------------------- | :---------------------- | :----------------------------------------------------------------------- |
-| **Primary Accent Glow**  | `#00ffcc`               | Highlighting critical CTA elements, active states, and active code lines |
-| **Emerald Teal**         | `#00c4a7`               | Primary brand color, SVG logo gradient, icons, badges                    |
-| **Deep Teal**            | `#007564`               | Subtle gradients, borders, active focus indicators                       |
-| **Background Dark**      | `#0d0d0d`               | Deep obsidian backdrop color                                             |
-| **Card / Glass Surface** | `rgba(20, 20, 25, 0.7)` | Glassmorphism cards with backdrop filter blur                            |
-
-### Typography Stack
-
-- **Display Headlines**: `P22 Mackinac W01 Book` (Serif Display font for hero titles & prominent callouts)
-- **UI & Controls**: `Inter` (Sans-serif font for navigation, buttons, subheaders, and body text)
-- **Code & Sandbox**: `JetBrains Mono` (Monospaced font for code editor, line numbers, and output logs)
+### Brand Specifications
+- **Brand Name**: `Refyn Technologies Inc.`
+- **Website URL**: [https://refyn.app](https://refyn.app)
+- **Primary Logo Asset**: [`refyn-app/public/logo.svg`](file:///c:/Users/soumi/Refyn/refyn-app/public/logo.svg) — Scalable vector logo featuring continuous-stroke wordmark, gradient accents, and glowing geometric chevron emblem.
+- **Favicon & Web Mark**: [`refyn-app/public/icon.svg`](file:///c:/Users/soumi/Refyn/refyn-app/public/icon.svg) & [`refyn-app/app/icon.svg`](file:///c:/Users/soumi/Refyn/refyn-app/app/icon.svg) — 40x40 vector spark mark.
+- **Color Tokens**:
+  - **Primary Neon Glow**: `#00ffcc`
+  - **Emerald Teal**: `#00c4a7`
+  - **Deep Obsidian Surface**: `#0d0d0d`
+  - **Glass Card Fill**: `rgba(20, 20, 25, 0.7)`
 
 ---
 
-## ⚡ What To Do (Quickstart & Setup)
+## ✨ What Work (Platform Overview & Features)
 
-Follow these steps to set up the development workspace on your machine:
+**Refyn** is a next-generation AI platform designed to transform how software engineering teams write, review, and debug code. By combining real-time LLM inference with AST parsing, Refyn automatically detects issues and explains them in plain English before code hits production.
 
-### 1. System Requirements
+### Core Capabilities
 
-Ensure your environment meets the following software requirements:
+1. 🔍 **Automated AI Code Review**:
+   - Analyzes source code snippets across **30+ programming languages** (JavaScript, TypeScript, Python, C++, Rust, Go, Java, PHP, and more).
+   - Identifies logic flaws, null pointer dereferences, memory leaks, and anti-patterns.
+2. 💡 **Plain-English Bug Explanations**:
+   - Translates complex compiler tracebacks and stack traces into clear, actionable, step-by-step resolution guides.
+3. ⚡ **Interactive Multi-Language Compiler Workspace (`/compiler`)**:
+   - Provides a live web editor with syntax highlighting, real-time code execution simulator, and line-by-line AI recommendations.
+4. 🛡️ **Security Vulnerability Scanning**:
+   - Detects OWASP Top 10 security flaws, SQL injection risks, unsafe memory allocations, and hardcoded API keys.
+5. 💎 **State-of-the-Art User Interface**:
+   - Built with ambient background video layers, glassmorphic cards, SCSS design tokens, and fluid Framer Motion animations.
 
-- **Node.js**: `v18.x` or `v20.x+` (Recommended)
-- **npm**: `v9.x+` (or `pnpm` / `yarn`)
-- **Git**: Installed and configured
+---
 
-### 2. Repository Setup & Dependencies
+## ⚙️ How To Work (Execution Engine & Architecture)
 
-Clone the repository and install all required packages:
+### 1. Data Flow Architecture
 
-```bash
-git clone https://github.com/refyn/refyn-app.git
-cd refyn-app
-npm install
+```
+[ Developer Input ] ──► [ AST Parser & Tokenizer ] ──► [ AI Code Review Engine ]
+                                                                 │
+[ Interactive Editor ] ◄── [ Diff Generator & Fixes ] ◄──────────┘
 ```
 
-### 3. Environment Variables
+1. **Snippet Ingestion**: The user pastes or types code into the interactive live editor.
+2. **Tokenizer & AST Parsing**: Code is normalized, language-tagged, and tokenized.
+3. **AI Inference & Security Filter**: The snippet is evaluated against security rule sets and language models.
+4. **Markdown & Diff Formatting**: Plain-English explanations and side-by-side code fixes are rendered in real time inside the `/compiler` UI.
 
-Create a `.env.local` file in the root directory if environment keys are required:
+### 2. Component & State Architecture
+- **Next.js 16 App Router**: Leverages server components for fast initial load and client components for interactive UI elements.
+- **Global Auth & Workspace Context (`AuthModalContext.tsx`)**: Manages authentication modal triggers, loading screen state, and user sessions seamlessly.
+- **SCSS Design System**: SCSS Modules (`*.module.scss`) ensure zero global CSS name collisions and enforce strict design system tokens.
 
+---
+
+## ⚡ What Need (Prerequisites & Dependencies)
+
+### 1. System Requirements
+- **Node.js**: `v18.x` or `v20.x+` (LTS Version Recommended)
+- **npm**: `v9.x+` (or `pnpm` / `yarn`)
+- **Git**: `v2.x+`
+
+### 2. Primary Core Dependencies
+| Dependency | Version | Purpose |
+| :--- | :--- | :--- |
+| **Next.js** | `16.2.12` | Core React Framework & App Router |
+| **React** | `19.2.4` | UI View Library |
+| **TypeScript** | `^5.0` | Static Type Safety & Interfaces |
+| **Framer Motion** | `^12.43.0` | Smooth UI Transitions & Modal Backdrops |
+| **GSAP** | `^3.15.0` | High-Performance Scroll Animations |
+| **Lucide React** | `^1.27.0` | SVG UI Icons |
+| **Sass / SCSS** | `^1.102.0` | SCSS Modules & Styling Architecture |
+
+### 3. Environment Variables Setup (`.env.local`)
+Create a `.env.local` file in `refyn-app/` directory:
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_APP_ENV=development
@@ -109,125 +126,115 @@ NEXT_PUBLIC_APP_ENV=development
 
 ---
 
-## 🚀 How To Run (Execution Commands)
-
-| Command            | Action / Description                                                                                             |
-| :----------------- | :--------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`      | Starts the Next.js local development server on [http://localhost:3000](http://localhost:3000) with hot reloading |
-| `npm run build`    | Compiles and builds the production-ready application bundle in `.next/`                                          |
-| `npm start`        | Launches the production server using the built bundle                                                            |
-| `npx tsc --noEmit` | Runs full TypeScript static type checking without generating build output                                        |
-
-### Testing Development Features
-
-1. Execute `npm run dev`.
-2. Open [http://localhost:3000](http://localhost:3000) in your web browser.
-3. Click **Try for Free** or **Compiler** in the header navigation to test the live AI code review workspace (`/compiler`).
-4. Test pasting code snippets in JavaScript, Python, C++, Go, or Rust to see real-time bug explanations and suggestions.
-
----
-
-## 🛠️ How To Work (Architecture & Engineering Workflow)
-
-### Directory Structure Map
+## 📂 File Structure (Complete Project Map)
 
 ```
-refyn-app/
-├── app/                        # Next.js 16 App Router Pages & Layouts
-│   ├── compiler/               # Multi-language Compiler & AI Review Workspace (/compiler)
-│   │   ├── Compiler.module.scss
-│   │   └── page.tsx
-│   ├── globals.scss            # Global CSS tokens, resets & typography font imports
-│   ├── icon.svg                # Favicon vector asset
-│   ├── layout.tsx              # Root HTML Layout, Metadata, Favicons & Head fonts
-│   ├── not-found.tsx           # Custom 404 Page
-│   └── page.tsx                # Refyn Landing Page
-├── components/                 # Modular React UI Components
-│   ├── AuthModal/              # User authentication & workspace access modal
-│   ├── CTABanner/              # Conversion call-to-action banner
-│   ├── CodeDemo/               # Code review showcase card
-│   ├── Features/               # Platform capabilities grid
-│   ├── Footer/                 # Enterprise footer with video backdrop & company links
-│   ├── Hero/                   # Hero section with display typography
-│   ├── HeroPanel/              # Bottom-anchored glassmorphism showcase panel
-│   ├── HowItWorks/             # Interactive 3-step platform walkthrough
-│   ├── Languages/              # Supported language grid (30+ languages)
-│   ├── LiveEditor/             # Interactive live code editor demo
-│   ├── LoadingScreen/          # SVG logo vector animation loader screen
-│   ├── Logo/                   # Scalable SVG Brand Logo Component (<Logo />)
-│   ├── Navbar/                 # Sticky glassmorphism navigation header
-│   ├── Pricing/                # Subscription tier pricing table
-│   └── VideoBg/                # Ambient video background component
-├── context/                    # React Context Providers
-│   └── AuthModalContext.tsx    # Workspace auth & modal state provider
-├── public/                     # Static Assets & Logo SVG Files
-│   ├── icon.svg                # 40x40 vector favicon emblem
-│   ├── logo.svg                # Full enterprise vector logo
-│   ├── logo-icon.svg           # High-resolution standalone logo icon
-│   └── logo-dark.svg           # Dark-mode optimized logo asset
-├── package.json                # Project dependencies & npm scripts
-├── tsconfig.json               # TypeScript configuration
-└── README.md                   # Enterprise technical documentation
+Refyn/
+├── README.md                           # Root Enterprise Documentation & Setup Guide
+├── refyn-app/                          # Next.js Application Root
+│   ├── app/                            # App Router Routes & Pages
+│   │   ├── compiler/                   # Live Compiler & AI Review Workspace (/compiler)
+│   │   │   ├── Compiler.module.scss    # Workspace Styles
+│   │   │   └── page.tsx                # Compiler Route Page Component
+│   │   ├── globals.scss                # Global CSS variables, resets & web fonts
+│   │   ├── icon.svg                    # Vector Favicon Asset
+│   │   ├── layout.tsx                  # Root HTML Layout, Metadata & Web Fonts
+│   │   ├── not-found.tsx               # Custom 404 Error Page
+│   │   └── page.tsx                    # Refyn Landing Page Component
+│   ├── components/                     # Modular React Components
+│   │   ├── AuthModal/                  # User Auth & Sign-in Modal
+│   │   ├── CTABanner/                  # Bottom Conversion Call-to-Action Banner
+│   │   ├── CodeDemo/                   # Code Review Showcase Card
+│   │   ├── Features/                   # Capabilities & Feature Grid
+│   │   ├── Footer/                     # Video Backdrop Footer with Social Links
+│   │   ├── Hero/                       # Hero Banner with Display Typography
+│   │   ├── HeroPanel/                  # Glassmorphism Product Showcase Panel
+│   │   ├── HowItWorks/                 # Interactive 3-Step Walkthrough
+│   │   ├── Languages/                  # Multi-Language Grid (30+ Languages)
+│   │   ├── LiveEditor/                 # Live Interactive Editor Demo
+│   │   ├── LoadingScreen/              # SVG Vector Animation Loader Screen
+│   │   ├── Logo/                       # Scalable React Brand Logo Component (<Logo />)
+│   │   ├── Navbar/                     # Sticky Header with Mobile Navigation Drawer
+│   │   ├── Pricing/                    # Subscription Pricing Table
+│   │   └── VideoBg/                    # Ambient Background Video Component
+│   ├── context/                        # React Context Providers
+│   │   └── AuthModalContext.tsx        # Global Modal & Session Context Provider
+│   ├── public/                         # Static Web Assets
+│   │   ├── icon.svg                    # 40x40 Vector Favicon Mark
+│   │   └── logo.svg                    # Main Corporate Vector SVG Logo
+│   ├── package.json                    # Dependencies & NPM Scripts
+│   ├── tsconfig.json                   # TypeScript Compiler Configuration
+│   └── README.md                       # Sub-directory Documentation
 ```
 
-### State Management & Component Architecture
+---
 
-- **Context API (`AuthModalContext`)**: Controls workspace authentication triggers and loading screen states globally across both the landing page and compiler route.
-- **Styling Architecture**: SCSS Modules (`*.module.scss`) are paired with every component, guaranteeing zero CSS scoping conflicts while leveraging SCSS design tokens.
-- **Animations**: `framer-motion` for mobile nav drawers, modal backdrops, and interactive element hover states; `gsap` for scroll animations.
+## 🚀 How To Run (Commands & Setup)
 
-### Developer & Pull Request Guidelines
+### 1. Installation
+Clone the repository and install dependencies:
+```bash
+git clone https://github.com/refyn/refyn-app.git
+cd Refyn/refyn-app
+npm install
+```
 
-1. **Branching**: Create feature branches off `main` using `feature/feature-name` or `fix/issue-description`.
-2. **Strict Type Safety**: Avoid using `any`. Define explicit TypeScript interfaces for all props, states, and API payload models.
-3. **Pre-Commit Verification**: Always run `npx tsc --noEmit` and `npm run build` locally before submitting a Pull Request.
+### 2. Available Execution Commands
+
+| Command | Action / Description |
+| :--- | :--- |
+| `npm run dev` | Starts local Next.js development server at [http://localhost:3000](http://localhost:3000) with hot reloading |
+| `npm run build` | Compiles optimized production build bundle in `.next/` |
+| `npm start` | Launches production server using the built bundle |
+| `npx tsc --noEmit` | Runs full static TypeScript type-checking without emitting files |
 
 ---
 
-## 📌 What To Work On (Product Roadmap & Task Backlog)
+## 👥 Our Team & Leadership
 
-### ✅ Completed Milestones
+Refyn is created and engineered by a dedicated team of software architects, AI researchers, and product designers committed to empowering developers worldwide.
 
-- [x] Built Next.js 16 App Router structure with high-performance server & client components.
-- [x] Designed scalable vector SVG logo system (`<Logo />`) and public brand assets (`public/logo.svg`, `public/icon.svg`).
-- [x] Implemented responsive navigation header with mobile drawer and smooth scrolling anchors.
-- [x] Implemented multi-language compiler & AI review workspace route (`/compiler`).
-- [x] Configured dark-mode glassmorphism design tokens, typography, and video backdrops.
-- [x] Verified full TypeScript compilation clean (`npx tsc --noEmit`).
+<p align="center">
+  <img src="refyn-app/public/logo.svg" alt="Refyn Team" width="220" />
+</p>
 
-### 🚧 Active Sprint Tasks (In Progress)
+### Executive Leadership & Core Contributors
 
-- [ ] **AI Backend Integration**: Connect `/compiler` workspace to streaming AI review API endpoints (`/api/review`, `/api/explain`).
-- [ ] **Side-by-Side Code Diff Visualizer**: Add visual diff component comparing original vs. AI-suggested code fixes.
-- [ ] **User OAuth Integration**: Enable GitHub & Google OAuth sign-in inside `AuthModal`.
-- [ ] **Snippet Link Sharing**: Generate persistent, shareable URLs for code review analyses.
+- 🚀 **Soumik** — *Founder & Lead Systems Architect*
+  - Directs vision, core application architecture, and platform strategy.
+- 🤖 **Refyn AI Systems Team** — *Machine Learning & LLM Infrastructure*
+  - Develops prompt engineering pipelines, AST analysis models, and bug explanation algorithms.
+- 🎨 **Frontend Engineering & Design Systems Team** — *UI/UX & WebGL*
+  - Crafts the dark-mode glassmorphism interface, responsive SCSS modules, and Framer Motion micro-interactions.
+- 🔒 **Security & Cloud Reliability Team** — *Infrastructure & CI/CD*
+  - Manages enterprise application security, Vercel deployments, and sandbox isolation.
 
-### 🔮 Future Roadmap (Q3/Q4)
-
-- [ ] **VS Code & JetBrains Extensions**: Real-time line-by-line AI review directly inside IDE code editors.
-- [ ] **GitHub Action Bot (`refyn-action`)**: Automatic PR reviewer that leaves line comments on GitHub Pull Requests.
-- [ ] **Enterprise Team Workspaces**: Shared code review history, team rulesets, and custom security linting models.
+### 🤝 Join Our Team
+We are always looking for passionate software engineers, AI researchers, and UI designers. To contribute or inquire about careers, email us at [`careers@refyn.app`](mailto:careers@refyn.app) or submit a Pull Request.
 
 ---
 
-## 🌐 Deployment & CI/CD
+## 📜 License
 
-Refyn is ready to deploy on Vercel, Docker, or any Node.js cloud infrastructure.
+This project is licensed under the **Proprietary Enterprise & Open License** — see below for terms:
 
-### Deploying on Vercel
+```
+Copyright (c) 2026 Refyn Technologies Inc. All Rights Reserved.
 
-1. Connect your repository to [Vercel](https://vercel.com/new).
-2. Configure build settings:
-   - **Framework Preset**: Next.js
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `.next`
-3. Click **Deploy**.
+Permission is hereby granted to view, test, and evaluate the Refyn codebase 
+for internal development, testing, and security auditing purposes. 
+
+Unauthorized duplication, redistribution, or commercial resale of the 
+Refyn proprietary design system, branding assets, and AI inference logic 
+without explicit written permission from Refyn Technologies Inc. is strictly prohibited.
+```
 
 ---
 
 ## 🔒 Security & Contact
 
 - **Company**: Refyn Technologies Inc.
-- **Website**: [https://refyn.app](https://refyn.app)
-- **Support & Inquiries**: `support@refyn.app`
+- **Official Website**: [https://refyn.app](https://refyn.app)
+- **General Inquiries**: `contact@refyn.app`
+- **Security & Support**: `security@refyn.app`
 - **Copyright**: © 2026 Refyn Technologies Inc. All rights reserved.
