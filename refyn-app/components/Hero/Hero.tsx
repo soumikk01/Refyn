@@ -12,6 +12,16 @@ export default function Hero() {
   return (
     <section className={styles.hero} id="hero" aria-label="Hero">
 
+      {/* ── SVG Noise Filter for Shiny Headline Animation ── */}
+      <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+        <filter id="c3-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0" />
+          <feComposite in2="SourceGraphic" operator="in" result="noise" />
+          <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
+        </filter>
+      </svg>
+
       {/* ── Z-0: Boomerang ping-pong video background ── */}
       <VideoBg />
 
