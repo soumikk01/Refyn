@@ -1147,13 +1147,25 @@ function CompilerContent() {
         setAiSuggestion(result.suggestion ?? '');
         if (result.explanation) setAiExplanation(result.explanation);
         if (result.refactoredCode) setRefactoredCode(result.refactoredCode);
+
+        const findingsText = (result.findings || []).map((f: string) => `• ${f}`).join('\n');
+        const reviewChatMsg: ChatMessage = {
+          id: String(Date.now()),
+          sender: 'ai',
+          text: `### ⚡ Fyn AI Sol 4.0 Code Audit Results\n\n**Code Quality Score**: ${result.score}/100 · **Vulnerabilities**: ${result.vulnerabilities ?? 0} · **Memory**: ${result.memoryComplexity ?? 'O(1)'}\n\n**🧠 Explanation**:\n${result.explanation || `Evaluates code contracts for ${selectedLang.name} with zero runtime overhead.`}\n\n**📋 Audit Findings**:\n${findingsText || '• Clean code contract verified'}\n\n**💡 Suggested Refactor**:\n${result.suggestion || 'Strict type constraints and explicit return guarantees recommended.'}`,
+          codeSnippet: result.refactoredCode || undefined,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+
+        setChatMessages((prev) => [...prev, reviewChatMsg]);
+
         setTerminalLogs((prev) => [
           ...prev,
-          `✓ [Refyn AI Sol 4.0]: Score ${result.score}/100 · ${result.vulnerabilities ?? 0} vulnerabilities · ${result.memoryComplexity ?? 'O(1)'}`,
+          `✓ [Fyn AI Sol 4.0]: Score ${result.score}/100 · ${result.vulnerabilities ?? 0} vulnerabilities · ${result.memoryComplexity ?? 'O(1)'}`,
         ]);
       } else {
         // Raw text fallback
-        setTerminalLogs((prev) => [...prev, `⚡ [Refyn AI Sol 4.0]: ${result.raw ?? 'Review complete.'}`.slice(0, 200)]);
+        setTerminalLogs((prev) => [...prev, `⚡ [Fyn AI Sol 4.0]: ${result?.raw ?? 'Review complete.'}`.slice(0, 200)]);
       }
     } catch (err: any) {
       setTerminalLogs((prev) => [...prev, `✗ Network error: ${err.message}`]);
@@ -2035,158 +2047,64 @@ function CompilerContent() {
                   </div>
                 </div>
 
-                {/* AI Mode Sub-Header Tabs */}
-                <div className={styles.aiModeSubHeader}>
-                  <button
-                    className={`${styles.aiViewTabBtn} ${aiViewMode === 'chat' ? styles.aiViewTabActive : ''}`}
-                    onClick={() => setAiViewMode('chat')}
-                  >
-                    💬 AI Chat (Live)
-                  </button>
-                  <button
-                    className={`${styles.aiViewTabBtn} ${aiViewMode === 'audit' ? styles.aiViewTabActive : ''}`}
-                    onClick={() => setAiViewMode('audit')}
-                  >
-                    📊 Audit Overview
-                  </button>
-                </div>
-
                 <div className={styles.aiContent}>
-                  {aiViewMode === 'chat' ? (
-                    <div className={styles.chatList}>
-                      {chatMessages.map((msg) => (
-                        <div
-                          key={msg.id}
-                          className={`${styles.chatBubble} ${msg.sender === 'user' ? styles.userBubble : styles.aiBubble}`}
-                        >
-                          <div className={styles.bubbleMeta}>
-                            {msg.sender === 'user' ? (
-                              <span>You • {msg.timestamp}</span>
-                            ) : (
-                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                                <Logo size="sm" showText={false} />
-                                <span>Fyn AI Sol 4.0 • {msg.timestamp}</span>
-                              </span>
-                            )}
-                          </div>
-
-                          <div className={styles.bubbleText}>
-                            {msg.sender === 'ai' ? <TypewriterText text={msg.text} /> : msg.text}
-                          </div>
-
-                          {msg.codeSnippet && (
-                            <div className={styles.codeInsertCard}>
-                              <div className={styles.codeInsertSnippet}>
-                                {msg.codeSnippet}
-                              </div>
-                              <button
-                                className={styles.btnInsertCode}
-                                onClick={() => {
-                                  setCurrentCode((prev) => prev + '\n\n' + msg.codeSnippet);
-                                  setCodeProblems([]); // Clear problem on fix application!
-                                  setTerminalLogs((prev) => [
-                                    ...prev,
-                                    `✓ Inserted AI generated code into main.${selectedLang.ext}`,
-                                  ]);
-                                }}
-                              >
-                                <Check size={12} />
-                                <span>Insert into main.{selectedLang.ext}</span>
-                              </button>
-                            </div>
+                  <div className={styles.chatList}>
+                    {chatMessages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`${styles.chatBubble} ${msg.sender === 'user' ? styles.userBubble : styles.aiBubble}`}
+                      >
+                        <div className={styles.bubbleMeta}>
+                          {msg.sender === 'user' ? (
+                            <span>You • {msg.timestamp}</span>
+                          ) : (
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                              <Logo size="sm" showText={false} />
+                              <span>Fyn AI Sol 4.0 • {msg.timestamp}</span>
+                            </span>
                           )}
                         </div>
-                      ))}
 
-                      {isSendingAiPrompt && (
-                        <div className={styles.thinkingBubble}>
-                          <RefynLineLogoCreationAnimation />
-                          <span className={styles.thinkingText}>
-                            Thinking
-                            <span className={styles.thinkingDots}>
-                              <span>.</span><span>.</span><span>.</span>
-                            </span>
-                          </span>
+                        <div className={styles.bubbleText}>
+                          {msg.sender === 'ai' ? <TypewriterText text={msg.text} /> : msg.text}
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <>
-                      {/* Score Card */}
-                      <div className={styles.scoreCard}>
-                        <div className={styles.scoreTop}>
-                          <span className={styles.scoreVal}>
-                            {qualityScore !== null ? `${qualityScore} / 100` : '— / 100'}
-                          </span>
-                          <span className={styles.scoreLbl}>Code Quality Score</span>
-                        </div>
-                        <div className={styles.scoreBarTrack}>
-                          <div
-                            className={styles.scoreBarFill}
-                            style={{ width: `${qualityScore ?? 0}%` }}
-                          />
-                        </div>
-                        <div className={styles.scoreStats}>
-                          <span>0 Vulnerabilities</span>
-                          <span>O(1) Memory</span>
-                        </div>
-                      </div>
 
-                      {/* Code Output Card */}
-                      <div className={styles.codeOutputCard}>
-                        <div className={styles.outputHeader}>
-                          <Terminal size={13} />
-                          <span>Code Execution Output</span>
-                        </div>
-                        <div className={styles.outputContent}>
-                          {lastCodeOutput || 'Click "Run Code" to view output'}
-                        </div>
-                      </div>
-
-                      {/* AI Explanation Card */}
-                      <div className={styles.aiExplanationCard}>
-                        <div className={styles.cardSecHeading}>🧠 AI Code Explanation</div>
-                        <p className={styles.explanationText}>
-                          {aiExplanation}
-                        </p>
-                      </div>
-
-                      {/* AI Audit Findings */}
-                      <div className={styles.auditFindingsCard}>
-                        <div className={styles.cardSecHeading}>AI Audit Findings</div>
-                        {aiFindings.length > 0 ? (
-                          <ul className={styles.findingsList}>
-                            {aiFindings.map((finding, i) => (
-                              <li key={i}>
-                                <CheckCircle2 size={14} className={styles.checkIcon} />
-                                <span>{finding}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <ul className={styles.findingsList}>
-                            <li><span>Run AI Review to see findings</span></li>
-                          </ul>
+                        {msg.codeSnippet && (
+                          <div className={styles.codeInsertCard}>
+                            <div className={styles.codeInsertSnippet}>
+                              {msg.codeSnippet}
+                            </div>
+                            <button
+                              className={styles.btnInsertCode}
+                              onClick={() => {
+                                setCurrentCode((prev) => prev + '\n\n' + msg.codeSnippet);
+                                setCodeProblems([]); // Clear problem on fix application!
+                                setTerminalLogs((prev) => [
+                                  ...prev,
+                                  `✓ Inserted AI generated code into main.${selectedLang.ext}`,
+                                ]);
+                              }}
+                            >
+                              <Check size={12} />
+                              <span>Insert into main.{selectedLang.ext}</span>
+                            </button>
+                          </div>
                         )}
                       </div>
+                    ))}
 
-                      {/* Suggested Refactor Card */}
-                      <div className={styles.refactorCard}>
-                        <div className={styles.cardSecHeading}>Suggested Refactor</div>
-                        <p className={styles.refactorDesc}>
-                          {aiSuggestion || 'Run AI Review to get a personalized refactor suggestion.'}
-                        </p>
-                        <button
-                          className={`${styles.btnApplyFix} ${aiApplied ? styles.appliedFix : ''}`}
-                          onClick={handleApplyAiFix}
-                          disabled={aiApplied}
-                        >
-                          <Check size={14} />
-                          <span>{aiApplied ? `AI Fix Applied (${qualityScore ?? 100}/100)` : 'Apply AI Fix'}</span>
-                        </button>
+                    {isSendingAiPrompt && (
+                      <div className={styles.thinkingBubble}>
+                        <RefynLineLogoCreationAnimation />
+                        <span className={styles.thinkingText}>
+                          Thinking
+                          <span className={styles.thinkingDots}>
+                            <span>.</span><span>.</span><span>.</span>
+                          </span>
+                        </span>
                       </div>
-                    </>
-                  )}
+                    )}
+                  </div>
                 </div>
 
                 {/* Bottom AI Prompt Bar with Morphing Send Button */}
