@@ -3,9 +3,9 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './VideoBg.module.scss';
 
-// Exact abstract 3D video animation URL
+// Exact Cloudfront background video animation URL
 const VIDEO_URL =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260729_102822_0e6c87e8-c141-4744-bf32-ad30db296371.mp4';
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4';
 
 export default function VideoBg() {
   const videoRef = useRef<HTMLVideoElement>(null);
